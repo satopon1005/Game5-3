@@ -7,8 +7,6 @@
 #include "Font/Font.h"
 #include "Scene/SceneManager.h"
 
-SceneID g_current_scene_ID;
-
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
@@ -107,8 +105,6 @@ void InitGame()
 	Input::InitInput();
 	Sound::InitSound();
 	Font::LoadFontHandle();
-
-	g_current_scene_ID = Title;
 }
 
 void FinGame()

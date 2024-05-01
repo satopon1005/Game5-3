@@ -11,11 +11,10 @@ void FinGame();
 
 enum SceneID
 {
-	Title,
-	Play,
-	Result,
+	Title_Scene,
+	Edit_Scene,
+	Play_Scene,
+	Result_Scene,
 
-	LOOP
+	LOOP_Scene
 };
-
-extern SceneID g_current_scene_ID;
