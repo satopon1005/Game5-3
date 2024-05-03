@@ -2,13 +2,13 @@
 #include "../Common.h"
 #include "../File/File.h"
 
-constexpr int MAPCHIP_SIZE_X = SCREEN_SIZE_X / 32;
+constexpr int MAPCHIP_SIZE = SCREEN_SIZE_X / 32;
 
 constexpr int MAP_SIZE_X = SCREEN_SIZE_X * 2;
 constexpr int MAP_SIZE_Y = SCREEN_SIZE_Y * 2;
 
-constexpr int MAPCHIP_NUM_X = MAP_SIZE_X / MAPCHIP_SIZE_X;
-constexpr int MAPCHIP_NUM_Y = MAP_SIZE_Y / MAPCHIP_SIZE_X;
+constexpr int MAPCHIP_NUM_X = MAP_SIZE_X / MAPCHIP_SIZE;
+constexpr int MAPCHIP_NUM_Y = MAP_SIZE_Y / MAPCHIP_SIZE;
 
 constexpr char MAPCHIP_NUM_FILE_PATH[] = { "data/MapChip/MapChip_Num.txt" };
 constexpr char MAPCHIP_NAME_FILE_PATH[] = { "data/MapChip/MapChip_Name.txt" };

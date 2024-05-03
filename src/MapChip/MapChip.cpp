@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "MapChip.h"
+#include "../Screen/Screen.h"
 
 int MapChip::m_mapchip_index;
 
@@ -38,11 +39,11 @@ void MapChip::Step()
 }
 void MapChip::Draw()
 {
-	for (int i = 0; i < MAPCHIP_NUM_Y; i++) {
-		for (int j = 0; j < MAPCHIP_NUM_X; j++) {
-			if (m_mapchip_handle_index[i][j] == 1)
-				DrawBox(i * MAPCHIP_SIZE_X, j * MAPCHIP_SIZE_X,
-					(i + 1) * MAPCHIP_SIZE_X, (j + 1) * MAPCHIP_SIZE_X,
+	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
+		for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
+			if (m_mapchip_handle_index[y_index][x_index] == 1)
+				DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+					(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
 					GetColor(255, 0, 0), true);
 		}
 	}
