@@ -3,6 +3,10 @@
 #include "../Common.h"
 #include "../Sound/Sound.h"
 
+#include "SceneTitle/SceneTitle.h"
+#include "ScenePlay/ScenePlay.h"
+#include "SceneEdit/SceneEdit.h"
+
 int SceneBace::g_scene_ID;
 
 SceneManager::SceneManager()
@@ -18,6 +22,8 @@ void SceneManager::Main()
 		if (scene != nullptr) {
 			delete scene;
 		}
+		scene = new SceneTitle;
+		scene->Init();
 		SceneBace::g_scene_ID = LOOP_Scene;
 		break;
 	}
@@ -25,6 +31,8 @@ void SceneManager::Main()
 		if (scene != nullptr) {
 			delete scene;
 		}
+		scene = new SceneEdit;
+		scene->Init();
 		SceneBace::g_scene_ID = LOOP_Scene;
 		break;
 	}
@@ -32,6 +40,8 @@ void SceneManager::Main()
 		if (scene != nullptr) {
 			delete scene;
 		}
+		scene = new ScenePlay;
+		scene->Init();
 		SceneBace::g_scene_ID = LOOP_Scene;
 		break;
 	}

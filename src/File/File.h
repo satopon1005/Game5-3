@@ -12,3 +12,6 @@ public:
 	bool OpenFile(const char* file_name, const char* open_type);
 	void CloseFile();
 };
+
+//‹ó”’‹æØ‚èƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+//fscanf
