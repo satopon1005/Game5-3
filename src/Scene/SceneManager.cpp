@@ -6,6 +6,7 @@
 #include "SceneTitle/SceneTitle.h"
 #include "ScenePlay/ScenePlay.h"
 #include "SceneEdit/SceneEdit.h"
+#include "SceneSelect/SceneSelect.h"
 
 int SceneBace::g_scene_ID;
 
@@ -24,7 +25,16 @@ void SceneManager::Main()
 		}
 		scene = new SceneTitle;
 		scene->Init();
-		SceneBace::g_scene_ID = LOOP_Scene;
+		SceneBace::g_scene_ID = Loop_Scene;
+		break;
+	}
+	case Select_Scene: {
+		if (scene != nullptr) {
+			delete scene;
+		}
+		scene = new SceneSelect;
+		scene->Init();
+		SceneBace::g_scene_ID = Loop_Scene;
 		break;
 	}
 	case Edit_Scene: {
@@ -33,7 +43,7 @@ void SceneManager::Main()
 		}
 		scene = new SceneEdit;
 		scene->Init();
-		SceneBace::g_scene_ID = LOOP_Scene;
+		SceneBace::g_scene_ID = Loop_Scene;
 		break;
 	}
 	case Play_Scene: {
@@ -42,14 +52,7 @@ void SceneManager::Main()
 		}
 		scene = new ScenePlay;
 		scene->Init();
-		SceneBace::g_scene_ID = LOOP_Scene;
-		break;
-	}
-	case Result_Scene: {
-		if (scene != nullptr) {
-			delete scene;
-		}
-		SceneBace::g_scene_ID = LOOP_Scene;
+		SceneBace::g_scene_ID = Loop_Scene;
 		break;
 	}
 	}

@@ -36,7 +36,7 @@ void MapChip::Init(int index)
 {
 	m_mapchip_index = 0;
 	LoadFileName();
-	LoadMapChip(MapChip::m_mapchip_index);
+	LoadMapChip(index);
 }
 
 void MapChip::Step()
@@ -45,8 +45,8 @@ void MapChip::Step()
 }
 void MapChip::StepEdit()
 {
-	int x_index = Input::GetMousePosX() / MAPCHIP_SIZE;
-	int y_index = Input::GetMousePosY() / MAPCHIP_SIZE;
+	int x_index = (Input::GetMousePosX() + Screen::m_screen_pos.x) / MAPCHIP_SIZE;
+	int y_index = (Input::GetMousePosY() + Screen::m_screen_pos.y) / MAPCHIP_SIZE;
 
 	if (Input::IsKeyDown(KEY_INPUT_1)) {
 		m_mapchip_handle_index[y_index][x_index] = 1;

@@ -6,7 +6,7 @@
 
 void ScenePlay::Init()
 {
-	mapchip_info.Init(0);
+	mapchip_info.Init(MapChip::m_mapchip_index);
 	Screen::Init();
 }
 void ScenePlay::Step()

@@ -12,9 +12,9 @@ void FinGame();
 enum SceneID
 {
 	Title_Scene,
+	Select_Scene,
 	Edit_Scene,
 	Play_Scene,
-	Result_Scene,
 
-	LOOP_Scene
+	Loop_Scene
 };

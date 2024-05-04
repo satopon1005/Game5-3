@@ -36,8 +36,6 @@ enum MapChipContent
 class MapChip
 {
 private:
-	static int m_mapchip_index;
-
 	int m_mapchip_file_num;
 	int m_mapchip_handle_index[MAPCHIP_NUM_Y][MAPCHIP_NUM_X];
 	char** m_mapchip_file_name;
@@ -45,6 +43,8 @@ private:
 	File file_info;
 
 public:
+	static int m_mapchip_index;
+
 	MapChip();
 	~MapChip();
 
@@ -63,4 +63,6 @@ public:
 	void LoadMapChip(int index);
 
 	void SaveMapChip();
+
+	int GetMapNum() { return m_mapchip_file_num; }
 };

@@ -13,7 +13,7 @@ void SceneTitle::Step()
 		SceneBace::g_scene_ID = Edit_Scene;
 	}
 	if (Input::IsKeyDown(KEY_INPUT_RETURN) && Input::IsKeyDown(KEY_INPUT_LSHIFT)) {
-		SceneBace::g_scene_ID = Play_Scene;
+		SceneBace::g_scene_ID = Select_Scene;
 	}
 }
 void SceneTitle::Draw()
