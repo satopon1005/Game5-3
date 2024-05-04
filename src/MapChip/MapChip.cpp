@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "MapChip.h"
 #include "../Screen/Screen.h"
+#include "../Input/Input.h"
 
 int MapChip::m_mapchip_index;
 
@@ -23,9 +24,13 @@ MapChip::~MapChip()
 	}
 }
 
-void MapChip::Init()
+void MapChip::InitEdit()
 {
-	
+	LoadMapNum();
+	for (int i = 0; i < MAPCHIP_NUM_Y; i++)
+		for (int j = 0; j < MAPCHIP_NUM_X; j++)
+			m_mapchip_handle_index[i][j] = 0;
+	m_mapchip_file_name = nullptr;
 }
 void MapChip::Init(int index)
 {
@@ -33,9 +38,47 @@ void MapChip::Init(int index)
 	LoadFileName();
 	LoadMapChip(MapChip::m_mapchip_index);
 }
+
 void MapChip::Step()
 {
 
+}
+void MapChip::StepEdit()
+{
+	int x_index = Input::GetMousePosX() / MAPCHIP_SIZE;
+	int y_index = Input::GetMousePosY() / MAPCHIP_SIZE;
+
+	if (Input::IsKeyDown(KEY_INPUT_1)) {
+		m_mapchip_handle_index[y_index][x_index] = 1;
+	}
+	if (Input::IsKeyDown(KEY_INPUT_2)) {
+		m_mapchip_handle_index[y_index][x_index] = 2;
+	}
+	if (Input::IsKeyDown(KEY_INPUT_3)) {
+		m_mapchip_handle_index[y_index][x_index] = 3;
+	}
+}
+
+void MapChip::DrawEdit()
+{
+	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
+		DrawLine((int)(-Screen::m_screen_pos.x),
+			(int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+			(int)(MAP_SIZE_X - Screen::m_screen_pos.x),
+			(int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+			GetColor(255, 255, 255), 2);
+
+		for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
+			if (y_index == 0) {
+				DrawLine((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x),
+					(int)(-Screen::m_screen_pos.y),
+					(int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x),
+					(int)(MAP_SIZE_Y - Screen::m_screen_pos.y),
+					GetColor(255, 255, 255), 2);
+			}
+		}
+	}
+	Draw();
 }
 void MapChip::Draw()
 {
@@ -45,6 +88,14 @@ void MapChip::Draw()
 				DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
 					(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
 					GetColor(255, 0, 0), true);
+			if (m_mapchip_handle_index[y_index][x_index] == 2)
+				DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+					(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+					GetColor(0, 255, 0), true);
+			if (m_mapchip_handle_index[y_index][x_index] == 3)
+				DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+					(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+					GetColor(0, 0, 255), true);
 		}
 	}
 }
@@ -109,4 +160,9 @@ void MapChip::LoadMapChip(int index)
 
 		file_info.CloseFile();
 	}
+}
+
+void MapChip::SaveMapChip()
+{
+
 }

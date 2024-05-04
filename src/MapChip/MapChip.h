@@ -2,7 +2,7 @@
 #include "../Common.h"
 #include "../File/File.h"
 
-constexpr int MAPCHIP_SIZE = SCREEN_SIZE_X / 32;
+constexpr int MAPCHIP_SIZE = 40;
 
 constexpr int MAP_SIZE_X = SCREEN_SIZE_X * 2;
 constexpr int MAP_SIZE_Y = SCREEN_SIZE_Y * 2;
@@ -48,13 +48,19 @@ public:
 	MapChip();
 	~MapChip();
 
-	void Init();
+	void InitEdit();
 	void Init(int index);
+
 	void Step();
+	void StepEdit();
+
 	void Draw();
+	void DrawEdit();
 
 	void LoadMapNum();
 	void LoadFileName();
 
 	void LoadMapChip(int index);
+
+	void SaveMapChip();
 };

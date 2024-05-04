@@ -7,4 +7,5 @@ public:
 
 	static void Init();
 	static void Step();
+	static void StepEdit();
 };

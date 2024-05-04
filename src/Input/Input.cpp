@@ -1,11 +1,12 @@
 #include "DxLib.h"
 #include "Input.h"
+#include "../Collision/Collision.h"
 
 char Input::currentKeyBuf[];
 char Input::preKeyBuf[];
 
 // マウス関連変数
-
+int Input::mouse_pos_x, Input::mouse_pos_y;
 int Input::currentMouseBuf[];
 int Input::preMouseBuf[];
 
@@ -21,10 +22,14 @@ void Input::InitInput()
 		currentMouseBuf[i] = 0;
 		preMouseBuf[i] = 0;
 	}
+	mouse_pos_x = 0;
+	mouse_pos_y = 0;
 }
 
 void Input::StepInput()
 {
+	GetMousePoint(&mouse_pos_x, &mouse_pos_y);
+
 	for (int i = 0; i < KEY_BUF_LEN; i++)
 		preKeyBuf[i] = currentKeyBuf[i];
 
@@ -159,5 +164,31 @@ bool Input::IsMouseDown(int mouse_code)
 	if (currentMouseBuf[mouse_code] == 1)
 		return true;
 
+	return false;
+}
+
+
+bool Input::IsKeyPushInArea(int key_code, float rect_x, float rect_y, float rect_w, float rect_h)
+{
+	if (IsKeyPush(key_code))
+	{
+		GetMousePoint(&mouse_pos_x, &mouse_pos_y);
+		if (Collision::IsHitRectPoint(rect_x, rect_y, rect_w, rect_h, (float)mouse_pos_x, (float)mouse_pos_y))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Input::IsMousePushInArea(int mouse_code, float rect_x, float rect_y, float rect_w, float rect_h)
+{
+	if (IsMousePush(mouse_code))
+	{
+		if (Collision::IsHitRectPoint(rect_x, rect_y, rect_w, rect_h, (float)mouse_pos_x, (float)mouse_pos_y))
+		{
+			return true;
+		}
+	}
 	return false;
 }
