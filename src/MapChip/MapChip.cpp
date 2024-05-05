@@ -30,12 +30,19 @@ void MapChip::InitEdit()
 	for (int i = 0; i < MAPCHIP_NUM_Y; i++)
 		for (int j = 0; j < MAPCHIP_NUM_X; j++)
 			m_mapchip_handle_index[i][j] = 0;
-	m_mapchip_file_name = nullptr;
+
+	m_mapchip_file_name = new char*;
+	m_mapchip_file_name[0] = new char[64];
+	m_mapchip_file_name[0] = { (char*)"data/MapChip/Map3_edit.csv" };
 }
-void MapChip::Init(int index)
+void MapChip::Init()
 {
 	m_mapchip_index = 0;
 	LoadFileName();
+}
+void MapChip::Init(int index)
+{
+	Init();
 	LoadMapChip(index);
 }
 
@@ -45,8 +52,8 @@ void MapChip::Step()
 }
 void MapChip::StepEdit()
 {
-	int x_index = (Input::GetMousePosX() + Screen::m_screen_pos.x) / MAPCHIP_SIZE;
-	int y_index = (Input::GetMousePosY() + Screen::m_screen_pos.y) / MAPCHIP_SIZE;
+	int x_index = (int)((Input::GetMousePosX() + Screen::m_screen_pos.x) / MAPCHIP_SIZE);
+	int y_index = (int)((Input::GetMousePosY() + Screen::m_screen_pos.y) / MAPCHIP_SIZE);
 
 	if (Input::IsKeyDown(KEY_INPUT_1)) {
 		m_mapchip_handle_index[y_index][x_index] = 1;
@@ -164,5 +171,15 @@ void MapChip::LoadMapChip(int index)
 
 void MapChip::SaveMapChip()
 {
+	if (file_info.OpenFile(m_mapchip_file_name[0], "w")) {
+		//保存先のファイルを開く
+		for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
+			for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
+				fprintf(file_info.fp, "%d,", m_mapchip_handle_index[y_index][x_index]);
+			}
+			fprintf(file_info.fp, "\n");
+		}
 
+		file_info.CloseFile();
+	}
 }

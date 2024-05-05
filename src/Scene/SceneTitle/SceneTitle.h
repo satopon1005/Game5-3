@@ -9,4 +9,5 @@ public:
 	void Init();
 	void Step();
 	void Draw();
+	void Fin();
 };

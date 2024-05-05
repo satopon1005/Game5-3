@@ -20,3 +20,7 @@ void SceneTitle::Draw()
 {
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "ƒ^ƒCƒgƒ‹");
 }
+void SceneTitle::Fin()
+{
+
+}

@@ -21,6 +21,7 @@ void SceneManager::Main()
 	switch (SceneBace::g_scene_ID) {
 	case Title_Scene: {
 		if (scene != nullptr) {
+			scene->Fin();
 			delete scene;
 		}
 		scene = new SceneTitle;
@@ -30,6 +31,7 @@ void SceneManager::Main()
 	}
 	case Select_Scene: {
 		if (scene != nullptr) {
+			scene->Fin();
 			delete scene;
 		}
 		scene = new SceneSelect;
@@ -39,6 +41,7 @@ void SceneManager::Main()
 	}
 	case Edit_Scene: {
 		if (scene != nullptr) {
+			scene->Fin();
 			delete scene;
 		}
 		scene = new SceneEdit;
@@ -48,6 +51,7 @@ void SceneManager::Main()
 	}
 	case Play_Scene: {
 		if (scene != nullptr) {
+			scene->Fin();
 			delete scene;
 		}
 		scene = new ScenePlay;

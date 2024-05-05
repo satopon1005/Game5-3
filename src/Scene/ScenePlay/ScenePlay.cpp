@@ -21,3 +21,7 @@ void ScenePlay::Draw()
 	mapchip_info.Draw();
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "ƒvƒŒƒC");
 }
+void ScenePlay::Fin()
+{
+
+}

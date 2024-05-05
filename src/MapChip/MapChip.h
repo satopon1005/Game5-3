@@ -49,6 +49,7 @@ public:
 	~MapChip();
 
 	void InitEdit();
+	void Init();
 	void Init(int index);
 
 	void Step();
@@ -65,4 +66,5 @@ public:
 	void SaveMapChip();
 
 	int GetMapNum() { return m_mapchip_file_num; }
+	char* GetFileName(int index) { return m_mapchip_file_name[index]; }
 };

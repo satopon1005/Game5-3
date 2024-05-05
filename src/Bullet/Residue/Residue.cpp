@@ -19,7 +19,7 @@ void Residue::Step() {
 }
 
 void Residue::Draw() {
-	DrawRotaGraph(bulletPos.x, bulletPos.y, 1.0f, bulletRot.y, handle, true);
+	DrawRotaGraph((int)(bulletPos.x), (int)(bulletPos.y), 1.0f, bulletRot.y, handle, true);
 }
 
 void Residue::Fin() {
