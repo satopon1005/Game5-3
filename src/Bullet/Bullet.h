@@ -1,42 +1,31 @@
 #pragma once
 #include "DxLib.h"
-
 #include "../Common.h"
+#include "../Frame/Frame.h"
 #include "../MyMath/MyMath.h"
+#include "SwordSlash/SwordSlash.h"
 
-enum BULLET_TYPE {
-	NOTHING = -1,		//データなし
+class CBulletMaster
+{
+	protected:
+		bool isDraw;	//描画フラグ
 
-	RESIDUE,		//残留弾
+	private:
+		int Frame;		//フレームカウント
 
-	BULLET_NUM,		//弾タイプの総数
-};
+	public:
+		//コンストラクタ・デストラクタ
+		CBulletMaster();
+		~CBulletMaster();
 
-class Bullet {
-protected:
-
-	const char bulletFilePath[BULLET_NUM][256] = {
-		"data/",
-	};
-
-	BULLET_TYPE bulletType;
-
-	VECTOR bulletPos;		//座標
-	VECTOR bulletRot;		//角度
-	VECTOR bulletSpeed;		//移動速度
-
-	int handle;	//画像ハンドル
-	float Time;	//時間カウント用
-	bool isUse;	//撃っているか(初期値false)
-	bool isHit;	//当たっているか(初期値false)
-
-	void ScreenOut(); //画面外に出たらフラグを折る
-	//範囲指定乱数
-	int ScopeRand(int min, int max);
-
-public:
-	void Init();
-	void Step();
-	void Draw();
-	void Fin();
+		//初期化
+		void Init();
+		//ロード
+		void Load();
+		//通常処理
+		void Step();
+		//描画
+		void Draw();
+		//後処理
+		void Fin();
 };

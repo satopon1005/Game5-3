@@ -64,6 +64,8 @@ public:
 	void LoadMapChip(int index);
 
 	void SaveMapChip();
+	void SaveMapChipNum(int num);
+	void SaveMapChipName(string name);
 
 	int GetMapNum() { return m_mapchip_file_num; }
 	char* GetFileName(int index) { return m_mapchip_file_name[index]; }

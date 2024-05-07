@@ -33,7 +33,7 @@ void MapChip::InitEdit()
 
 	m_mapchip_file_name = new char*;
 	m_mapchip_file_name[0] = new char[64];
-	m_mapchip_file_name[0] = { (char*)"data/MapChipData/Map3_edit.csv" };
+	//m_mapchip_file_name[0] = { (char*)"data/MapChipData/Map3_edit.csv" };
 }
 void MapChip::Init()
 {
@@ -178,6 +178,33 @@ void MapChip::LoadMapChip(int index)
 //マップチップデータを保存
 void MapChip::SaveMapChip()
 {
+	//保存するファイルの名前を入力
+	//==================================================================================
+	string s_mapchip_name = "data/MapChipData/";
+	char name[17];
+	for (int i = 0; i < 17; i++)
+		name[i] = 0;
+
+	DrawFormatString(0, 0, GetColor(0, 0, 0), "保存するファイルの名前を入力してください");
+	KeyInputSingleCharString(0, 15, 16, name, false);
+
+	s_mapchip_name += name;
+	s_mapchip_name += ".csv";
+
+	for (int i = 0; i < 64; i++)
+		m_mapchip_file_name[0] = 0;
+
+	m_mapchip_file_name[0] = (char*)s_mapchip_name.c_str();
+	//==================================================================================
+
+	//ファイルの名前を保存する
+	//==================================================================================
+
+	SaveMapChipNum(m_mapchip_file_num + 1);
+	SaveMapChipName(s_mapchip_name);
+
+	//==================================================================================
+
 	if (file_info.OpenFile(m_mapchip_file_name[0], "w")) {
 		//保存先のファイルを開く
 		for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
@@ -186,6 +213,23 @@ void MapChip::SaveMapChip()
 			}
 			fprintf(file_info.fp, "\n");
 		}
+
+		file_info.CloseFile();
+	}
+}
+
+void MapChip::SaveMapChipNum(int num)
+{
+	if (file_info.OpenFile(MAPCHIP_NUM_FILE_PATH, "w")) {
+		fprintf(file_info.fp, "%d", num);
+
+		file_info.CloseFile();
+	}
+}
+void MapChip::SaveMapChipName(string name)
+{
+	if (file_info.OpenFile(MAPCHIP_NAME_FILE_PATH, "a")) {
+		fprintf(file_info.fp, "\n%s", name.c_str());
 
 		file_info.CloseFile();
 	}

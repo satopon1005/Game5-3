@@ -1,4 +1,1 @@
 data/MapChipData/Map1.csv
-data/MapChipData/Map2.csv
-data/MapChipData/Map3.csv
-data/MapChipData/Map3_edit.csv
