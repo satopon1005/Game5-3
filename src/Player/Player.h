@@ -1,6 +1,6 @@
 #pragma once
 #include "DxLib.h"
-#include "../Bullet/Residue/Residue.h"
+#include "../Bullet/Bullet.h"
 
 const char PLAYER_PATH[] = { "data/Player/knight.png" };
 const float PLAYER_SIZE = 384.0f;
