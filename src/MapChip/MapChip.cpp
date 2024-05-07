@@ -33,7 +33,7 @@ void MapChip::InitEdit()
 
 	m_mapchip_file_name = new char*;
 	m_mapchip_file_name[0] = new char[64];
-	m_mapchip_file_name[0] = { (char*)"data/MapChip/Map3_edit.csv" };
+	m_mapchip_file_name[0] = { (char*)"data/MapChipData/Map3_edit.csv" };
 }
 void MapChip::Init()
 {
@@ -56,6 +56,9 @@ void MapChip::StepEdit()
 	int x_index = (int)((Input::GetMousePosX() + Screen::m_screen_pos.x) / MAPCHIP_SIZE);
 	int y_index = (int)((Input::GetMousePosY() + Screen::m_screen_pos.y) / MAPCHIP_SIZE);
 
+	if (Input::IsKeyDown(KEY_INPUT_0)) {
+		m_mapchip_handle_index[y_index][x_index] = 0;
+	}
 	if (Input::IsKeyDown(KEY_INPUT_1)) {
 		m_mapchip_handle_index[y_index][x_index] = 1;
 	}
