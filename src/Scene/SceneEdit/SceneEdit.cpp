@@ -36,7 +36,10 @@ void SceneEdit::Step()
 }
 void SceneEdit::Draw()
 {
-	mapchip_info.DrawEdit();
+	if (m_edit_mapchip_flag)
+		mapchip_info.DrawEdit();
+
+	mapchip_info.Draw();
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "エディット");
 
 	if (!m_edit_mapchip_flag) {

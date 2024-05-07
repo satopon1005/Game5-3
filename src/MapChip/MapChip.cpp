@@ -45,11 +45,12 @@ void MapChip::Init(int index)
 	Init();
 	LoadMapChip(index);
 }
-
+//プレイシーンでのステップ処理
 void MapChip::Step()
 {
 
 }
+//エディットシーンでのステップ処理
 void MapChip::StepEdit()
 {
 	int x_index = (int)((Input::GetMousePosX() + Screen::m_screen_pos.x) / MAPCHIP_SIZE);
@@ -66,6 +67,7 @@ void MapChip::StepEdit()
 	}
 }
 
+//エディットシーンでの描画処理
 void MapChip::DrawEdit()
 {
 	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
@@ -85,8 +87,8 @@ void MapChip::DrawEdit()
 			}
 		}
 	}
-	Draw();
 }
+//プレイシーンでの描画処理
 void MapChip::Draw()
 {
 	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
@@ -107,6 +109,7 @@ void MapChip::Draw()
 	}
 }
 
+//マップチップデータが保存されているファイルの名前を取得
 void MapChip::LoadFileName()
 {
 	LoadMapNum();
@@ -126,6 +129,7 @@ void MapChip::LoadFileName()
 	}
 }
 
+//マップチップデータが保存されているファイルの個数を取得
 void MapChip::LoadMapNum()
 {
 	if (file_info.OpenFile(MAPCHIP_NUM_FILE_PATH, "r")) {
@@ -134,7 +138,7 @@ void MapChip::LoadMapNum()
 		file_info.CloseFile();
 	}
 }
-
+//マップチップデータを取得
 void MapChip::LoadMapChip(int index)
 {
 	if (file_info.OpenFile(m_mapchip_file_name[index],"r")) {
@@ -168,7 +172,7 @@ void MapChip::LoadMapChip(int index)
 		file_info.CloseFile();
 	}
 }
-
+//マップチップデータを保存
 void MapChip::SaveMapChip()
 {
 	if (file_info.OpenFile(m_mapchip_file_name[0], "w")) {

@@ -34,7 +34,7 @@ void Player::Step()
 
 void Player::Draw()
 {
-	DrawRotaGraph(PlayerPos.x, PlayerPos.y, 1.0f, 0.0f, handle, true);
+	DrawRotaGraph((int)(PlayerPos.x), (int)(PlayerPos.y), 1.0f, 0.0f, handle, true);
 }
 
 void Player::Fin()
