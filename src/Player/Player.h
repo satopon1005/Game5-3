@@ -5,7 +5,7 @@
 const char PLAYER_PATH[] = { "data/Player/knight.png" };
 const float PLAYER_SIZE = 384.0f;
 
-class Player:public Residue
+class Player
 {
 private:
 	int handle;
