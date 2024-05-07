@@ -1,10 +1,11 @@
 #pragma once
 #include "DxLib.h"
+#include "../Bullet/Residue/Residue.h"
 
-const char PLAYER_PATH[] = { "data/Player/仮置きプレイヤー.png" };
-const float PLAYER_SIZE = 32.0f;
+const char PLAYER_PATH[] = { "data/Player/knight.png" };
+const float PLAYER_SIZE = 384.0f;
 
-class Player
+class Player:public Residue
 {
 private:
 	int handle;
@@ -18,7 +19,13 @@ public:
 
 	void Init();
 	void Step();
+	void Move(VECTOR playerPos, VECTOR bulletPos);
+
 	void Draw();
 	void Fin();
 
+	float GetPosX(){return PlayerPos.x;}
+	float GetPosY(){return PlayerPos.y;}
+
+	bool IsShot();
 };
