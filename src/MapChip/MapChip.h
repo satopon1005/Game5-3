@@ -15,21 +15,7 @@ constexpr char MAPCHIP_NAME_FILE_PATH[] = { "data/MapChipData/MapChip_Name.txt" 
 
 enum MapChipContent
 {
-	FrontWall,
-	BackWall,
-	LeftWall,
-	RightWall,
-
-	LeftUpWall,
-	RightUpWall,
-	LeftDownWall,
-	RightDownWall,
-
-	LeftUpSharpWall,
-	RightUpSharpWall,
-	LeftDownSharpWall,
-	RightDownSharpWall,
-
+	Wall,
 	Floor,
 };
 
@@ -69,4 +55,6 @@ public:
 
 	int GetMapNum() { return m_mapchip_file_num; }
 	char* GetFileName(int index) { return m_mapchip_file_name[index]; }
+
+	int GetMapChipHandleIndex(int y_index, int x_index) { return m_mapchip_handle_index[y_index][x_index]; }
 };

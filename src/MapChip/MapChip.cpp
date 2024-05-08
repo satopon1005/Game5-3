@@ -29,11 +29,10 @@ void MapChip::InitEdit()
 	LoadMapNum();
 	for (int i = 0; i < MAPCHIP_NUM_Y; i++)
 		for (int j = 0; j < MAPCHIP_NUM_X; j++)
-			m_mapchip_handle_index[i][j] = 0;
+			m_mapchip_handle_index[i][j] = Floor;
 
 	m_mapchip_file_name = new char*;
 	m_mapchip_file_name[0] = new char[64];
-	//m_mapchip_file_name[0] = { (char*)"data/MapChipData/Map3_edit.csv" };
 }
 void MapChip::Init()
 {
@@ -59,18 +58,22 @@ void MapChip::StepEdit()
 	if (Input::GetMousePosX() > 0 && Input::GetMousePosX() < SCREEN_SIZE_X &&
 		Input::GetMousePosY() > 0 && Input::GetMousePosY() < SCREEN_SIZE_Y) {
 
-		if (Input::IsKeyDown(KEY_INPUT_0)) {
-			m_mapchip_handle_index[y_index][x_index] = 0;
-		}
 		if (Input::IsKeyDown(KEY_INPUT_1)) {
-			m_mapchip_handle_index[y_index][x_index] = 1;
+			m_mapchip_handle_index[y_index][x_index] = Wall;
 		}
 		if (Input::IsKeyDown(KEY_INPUT_2)) {
-			m_mapchip_handle_index[y_index][x_index] = 2;
+			m_mapchip_handle_index[y_index][x_index] = Floor;
 		}
-		if (Input::IsKeyDown(KEY_INPUT_3)) {
-			m_mapchip_handle_index[y_index][x_index] = 3;
-		}
+	}
+
+	//マップの端を壁にする
+	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
+		m_mapchip_handle_index[y_index][0] = Wall;
+		m_mapchip_handle_index[y_index][MAPCHIP_NUM_X - 1] = Wall;
+	}
+	for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
+		m_mapchip_handle_index[0][x_index] = Wall;
+		m_mapchip_handle_index[MAPCHIP_NUM_Y - 1][x_index] = Wall;
 	}
 }
 
@@ -94,24 +97,31 @@ void MapChip::DrawEdit()
 			}
 		}
 	}
+
+	DrawFormatString(0, 15, GetColor(255, 255, 255), "１：壁\n２：床");
 }
 //プレイシーンでの描画処理
 void MapChip::Draw()
 {
 	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
 		for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
-			if (m_mapchip_handle_index[y_index][x_index] == 1)
-				DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+			int color = GetColor(255, 255, 255);
+
+			switch (m_mapchip_handle_index[y_index][x_index]) {
+			case Wall: {
+				color = GetColor(255, 0, 0);
+				break;
+			}
+			case Floor: {
+				color = GetColor(0, 0, 0);
+				break;
+			}
+			}
+
+			
+			DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
 					(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
-					GetColor(255, 0, 0), true);
-			if (m_mapchip_handle_index[y_index][x_index] == 2)
-				DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
-					(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
-					GetColor(0, 255, 0), true);
-			if (m_mapchip_handle_index[y_index][x_index] == 3)
-				DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
-					(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
-					GetColor(0, 0, 255), true);
+					color, true);
 		}
 	}
 }

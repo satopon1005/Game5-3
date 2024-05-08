@@ -4,36 +4,29 @@
 #include "../MyMath/MyMath.h"
 
 //当たっているときどの方向から当たっているか
-//０，１，２，３：右、下、左、上
-int Collision::GetHitDirection2D(VECTOR objects, int size_x1, int size_y1,
-								VECTOR use, int size_x2, int size_y2,
-								float& overlap_x, float& overlap_y)
+//０，１：右、左
+//０，１：下、上
+int Collision::GetHitDirectionX2D(float objects_x, int size_x1, float use_x, int size_x2, float& overlap_x)
 {
-	int plas_x = 0;
-	int plas_y = 0;
-
-	if (objects.x < use.x) {
-		overlap_x = objects.x + size_x1 - use.x;
-		plas_x = 0;
+	if (objects_x < use_x) {
+		overlap_x = objects_x + size_x1 - use_x;
+		return 0;
 	}
 	else {
-		overlap_x = use.x + size_x2 - objects.x;
-		plas_x = 2;
+		overlap_x = use_x + size_x2 - objects_x;
+		return 1;
 	}
-
-	if (objects.y < use.y) {
-		overlap_y = objects.y + size_y1 - use.y;
-		plas_y = 1;
+}
+int Collision::GetHitDirectionY2D(float objects_y, int size_y1, float use_y, int size_y2, float& overlap_y)
+{
+	if (objects_y < use_y) {
+		overlap_y = objects_y + size_y1 - use_y;
+		return 0;
 	}
 	else {
-		overlap_y = use.y + size_y2 - objects.y;
-		plas_y = 3;
+		overlap_y = use_y + size_y2 - objects_y;
+		return 1;
 	}
-	
-	if (overlap_x < overlap_y)
-		return plas_x;
-	else
-		return plas_y;
 }
 
 //矩形の当たり判定
