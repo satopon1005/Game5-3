@@ -56,17 +56,21 @@ void MapChip::StepEdit()
 	int x_index = (int)((Input::GetMousePosX() + Screen::m_screen_pos.x) / MAPCHIP_SIZE);
 	int y_index = (int)((Input::GetMousePosY() + Screen::m_screen_pos.y) / MAPCHIP_SIZE);
 
-	if (Input::IsKeyDown(KEY_INPUT_0)) {
-		m_mapchip_handle_index[y_index][x_index] = 0;
-	}
-	if (Input::IsKeyDown(KEY_INPUT_1)) {
-		m_mapchip_handle_index[y_index][x_index] = 1;
-	}
-	if (Input::IsKeyDown(KEY_INPUT_2)) {
-		m_mapchip_handle_index[y_index][x_index] = 2;
-	}
-	if (Input::IsKeyDown(KEY_INPUT_3)) {
-		m_mapchip_handle_index[y_index][x_index] = 3;
+	if (Input::GetMousePosX() > 0 && Input::GetMousePosX() < SCREEN_SIZE_X &&
+		Input::GetMousePosY() > 0 && Input::GetMousePosY() < SCREEN_SIZE_Y) {
+
+		if (Input::IsKeyDown(KEY_INPUT_0)) {
+			m_mapchip_handle_index[y_index][x_index] = 0;
+		}
+		if (Input::IsKeyDown(KEY_INPUT_1)) {
+			m_mapchip_handle_index[y_index][x_index] = 1;
+		}
+		if (Input::IsKeyDown(KEY_INPUT_2)) {
+			m_mapchip_handle_index[y_index][x_index] = 2;
+		}
+		if (Input::IsKeyDown(KEY_INPUT_3)) {
+			m_mapchip_handle_index[y_index][x_index] = 3;
+		}
 	}
 }
 
