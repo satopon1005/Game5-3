@@ -13,7 +13,7 @@ constexpr int MAPCHIP_NUM_Y = MAP_SIZE_Y / MAPCHIP_SIZE;
 constexpr char MAPCHIP_NUM_FILE_PATH[] = { "data/MapChipData/MapChip_Num.txt" };
 constexpr char MAPCHIP_NAME_FILE_PATH[] = { "data/MapChipData/MapChip_Name.txt" };
 
-enum MapChipContent
+enum MapChipType
 {
 	Wall,
 	Floor,

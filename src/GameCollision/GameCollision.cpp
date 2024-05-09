@@ -3,10 +3,13 @@
 #include "../Collision/Collision.h"
 #include "../Player/Player.h"
 
-void GameCollision::PlayerToWall(MapChip& mapchip_info, VECTOR& player_pos)
+void CollisionPlayerToWall(MapChip& mapchip_info, VECTOR& player_pos)
 {
 	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
 		for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
+			if (mapchip_info.GetMapChipHandleIndex(y_index, x_index) == MapChipType::Wall)
+				continue;
+
 			if (Collision::IsHitRect(x_index * MAPCHIP_SIZE,
 									y_index * MAPCHIP_SIZE,
 									(x_index + 1) * MAPCHIP_SIZE,
@@ -30,22 +33,25 @@ void GameCollision::PlayerToWall(MapChip& mapchip_info, VECTOR& player_pos)
 					int down_wall_index = mapchip_info.GetMapChipHandleIndex(y_index + 1, x_index);
 
 					//その壁の右と下両方が壁のとき
-					if (right_wall_index == MapChipContent::Wall &&
-						down_wall_index == MapChipContent::Wall) {
+					if (right_wall_index == MapChipType::Wall &&
+						down_wall_index == MapChipType::Wall) {
 						player_pos.x += overlap_x;
 						player_pos.y += overlap_y;
 					}
 					//その壁の右が壁のとき
-					else if (right_wall_index == MapChipContent::Wall) {
+					else if (right_wall_index == MapChipType::Wall) {
 						player_pos.y += overlap_y;
 					}
 					//その壁の下が壁のとき
-					else if (down_wall_index == MapChipContent::Wall) {
+					else if (down_wall_index == MapChipType::Wall) {
 						player_pos.x += overlap_x;
 					}
 					//その壁の右と下両方に壁がないとき
 					else {
-						player_pos.y += overlap_y;
+						if (overlap_x > overlap_y)
+							player_pos.y += overlap_y;
+						else
+							player_pos.x += overlap_x;
 					}
 				}
 				//左下から当たったとき
@@ -54,22 +60,25 @@ void GameCollision::PlayerToWall(MapChip& mapchip_info, VECTOR& player_pos)
 					int down_wall_index = mapchip_info.GetMapChipHandleIndex(y_index + 1, x_index);
 
 					//その壁の左と下両方が壁のとき
-					if (left_wall_index == MapChipContent::Wall &&
-						down_wall_index == MapChipContent::Wall) {
+					if (left_wall_index == MapChipType::Wall &&
+						down_wall_index == MapChipType::Wall) {
 						player_pos.x -= overlap_x;
 						player_pos.y += overlap_y;
 					}
 					//その壁の左が壁のとき
-					else if (left_wall_index == MapChipContent::Wall) {
+					else if (left_wall_index == MapChipType::Wall) {
 						player_pos.y += overlap_y;
 					}
 					//その壁の下が壁のとき
-					else if (down_wall_index == MapChipContent::Wall) {
+					else if (down_wall_index == MapChipType::Wall) {
 						player_pos.x -= overlap_x;
 					}
 					//その壁の左と下両方に壁がないとき
 					else {
-						player_pos.y += overlap_y;
+						if (overlap_x > overlap_y)
+							player_pos.y += overlap_y;
+						else
+							player_pos.x -= overlap_x;
 					}
 				}
 				//左上から当たったとき
@@ -78,22 +87,25 @@ void GameCollision::PlayerToWall(MapChip& mapchip_info, VECTOR& player_pos)
 					int up_wall_index = mapchip_info.GetMapChipHandleIndex(y_index - 1, x_index);
 
 					//その壁の左と上両方が壁のとき
-					if (left_wall_index == MapChipContent::Wall &&
-						up_wall_index == MapChipContent::Wall) {
+					if (left_wall_index == MapChipType::Wall &&
+						up_wall_index == MapChipType::Wall) {
 						player_pos.x -= overlap_x;
 						player_pos.y -= overlap_y;
 					}
 					//その壁の左が壁のとき
-					else if (left_wall_index == MapChipContent::Wall) {
+					else if (left_wall_index == MapChipType::Wall) {
 						player_pos.y -= overlap_y;
 					}
 					//その壁の上が壁のとき
-					else if (up_wall_index == MapChipContent::Wall) {
+					else if (up_wall_index == MapChipType::Wall) {
 						player_pos.x -= overlap_x;
 					}
 					//その壁の右と上両方に壁がないとき
 					else {
-						player_pos.y -= overlap_y;
+						if (overlap_x > overlap_y)
+							player_pos.y -= overlap_y;
+						else
+							player_pos.x -= overlap_x;
 					}
 				}
 				//右上から当たったとき
@@ -102,22 +114,25 @@ void GameCollision::PlayerToWall(MapChip& mapchip_info, VECTOR& player_pos)
 					int up_wall_index = mapchip_info.GetMapChipHandleIndex(y_index - 1, x_index);
 
 					//その壁の右と上両方が壁のとき
-					if (right_wall_index == MapChipContent::Wall &&
-						up_wall_index == MapChipContent::Wall) {
+					if (right_wall_index == MapChipType::Wall &&
+						up_wall_index == MapChipType::Wall) {
 						player_pos.x += overlap_x;
 						player_pos.y -= overlap_y;
 					}
 					//その壁の右が壁のとき
-					else if (right_wall_index == MapChipContent::Wall) {
+					else if (right_wall_index == MapChipType::Wall) {
 						player_pos.y -= overlap_y;
 					}
 					//その壁の上が壁のとき
-					else if (up_wall_index == MapChipContent::Wall) {
+					else if (up_wall_index == MapChipType::Wall) {
 						player_pos.x += overlap_x;
 					}
 					//その壁の右と上両方に壁がないとき
 					else {
-						player_pos.y -= overlap_y;
+						if (overlap_x > overlap_y)
+							player_pos.y -= overlap_y;
+						else
+							player_pos.x += overlap_x;
 					}
 				}
 			}

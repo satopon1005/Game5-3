@@ -3,7 +3,7 @@
 #include "../Bullet/Bullet.h"
 
 const char PLAYER_PATH[] = { "data/Player/knight.png" };
-const float PLAYER_SIZE = 384.0f;
+const int PLAYER_SIZE = 40;
 
 class Player
 {
@@ -28,4 +28,6 @@ public:
 	float GetPosY(){return PlayerPos.y;}
 
 	bool IsShot();
+
+	VECTOR& GetPos() { return PlayerPos; }
 };
