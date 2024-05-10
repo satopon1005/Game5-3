@@ -8,6 +8,8 @@ void EnemyManager::Init()
 		enemy_info[i].Init();
 	}
 	m_spawn_interval_count = 0;
+
+	LoadDivGraph(ENEMY_HANDLE_PATH, 1, 1, 1, 256, 256, m_handle);
 }
 void EnemyManager::Step(VECTOR player_pos)
 {
@@ -24,7 +26,7 @@ void EnemyManager::Step(VECTOR player_pos)
 void EnemyManager::Draw()
 {
 	for (int i = 0; i < ENEMY_NUM; i++) {
-		enemy_info[i].Draw();
+		enemy_info[i].Draw(m_handle[enemy_info[i].GetEnemyType()]);
 	}
 }
 void EnemyManager::Fin()
@@ -32,6 +34,9 @@ void EnemyManager::Fin()
 	for (int i = 0; i < ENEMY_NUM; i++) {
 		enemy_info[i].Fin();
 	}
+
+	for (int i = 0; i < EnemyTypeMaxNum; i++)
+		DeleteGraph(m_handle[i]);
 }
 
 void EnemyManager::Spawn()

@@ -23,8 +23,10 @@ private:
 public:
 	void Init();
 	void Step(VECTOR player_pos);
-	void Draw();
+	void Draw(int handle);
 	void Fin();
 
 	bool Spawn();
+
+	int GetEnemyType() { return m_enemy_type; }
 };

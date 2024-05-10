@@ -10,6 +10,8 @@ private:
 	Enemy_Info enemy_info[ENEMY_NUM];
 	int m_spawn_interval_count;
 
+	int m_handle[EnemyTypeMaxNum];
+
 public:
 	void Init();
 	void Step(VECTOR player_pos);

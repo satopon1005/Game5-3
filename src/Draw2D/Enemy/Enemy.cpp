@@ -11,8 +11,6 @@ void Enemy_Info::Init()
 
 	m_distination_pos = { 0 };
 	m_enemy_type = 0;
-
-	LoadHandle((char*)ENEMY_HANDLE_PATH);
 }
 void Enemy_Info::Step(VECTOR player_pos)
 {
@@ -23,7 +21,7 @@ void Enemy_Info::Step(VECTOR player_pos)
 		m_pos.y += m_distination_pos.y;
 	}
 }
-void Enemy_Info::Draw()
+void Enemy_Info::Draw(int handle)
 {
 	if (m_isUse) {
 		DrawCircle((int)(m_pos.x - Screen::m_screen_pos.x + ENEMY_COLLISION_SIZE / 2),
@@ -35,12 +33,12 @@ void Enemy_Info::Draw()
 			(int)(m_pos.y - Screen::m_screen_pos.y),
 			(int)(m_pos.x - Screen::m_screen_pos.x + ENEMY_COLLISION_SIZE),
 			(int)(m_pos.y - Screen::m_screen_pos.y + ENEMY_COLLISION_SIZE),
-			m_handle[0], true);
+			handle, true);
 	}
 }
 void Enemy_Info::Fin()
 {
-	FinHandle();
+	
 }
 
 bool Enemy_Info::Spawn()
