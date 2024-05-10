@@ -23,10 +23,10 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 									(float)(y_index * MAPCHIP_SIZE),
 									(float)(MAPCHIP_SIZE),
 									(float)(MAPCHIP_SIZE),
-									pos.x,
-									pos.y,
-									(float)PLAYER_SIZE,
-									(float)PLAYER_SIZE)) {
+									pos.x - PLAYER_SIZE_R,
+									pos.y - PLAYER_SIZE_R,
+									(float)PLAYER_SIZE_R * 2,
+									(float)PLAYER_SIZE_R * 2)) {
 				float overlap_x = 0;
 				float overlap_y = 0;
 
@@ -35,13 +35,13 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 
 				direction_x = Collision::GetHitDirectionX2D((float)(x_index * MAPCHIP_SIZE),
 															MAPCHIP_SIZE,
-															pos.x,
-															(int)PLAYER_SIZE,
+															pos.x - PLAYER_SIZE_R,
+															(int)PLAYER_SIZE_R * 2,
 															overlap_x);
 				direction_y = Collision::GetHitDirectionX2D((float)(y_index * MAPCHIP_SIZE),
 															MAPCHIP_SIZE,
-															pos.y,
-															(int)PLAYER_SIZE,
+															pos.y - PLAYER_SIZE_R,
+															(int)PLAYER_SIZE_R * 2,
 															overlap_y);
 
 				//‰E‰º‚©‚ç“–‚½‚Á‚½‚Æ‚«
@@ -159,12 +159,12 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 
 bool CollisionPlayerToEnemy(VECTOR player_pos, VECTOR enemy_pos)
 {
-	if (Collision::IsHitCircle((player_pos.x + (float)PLAYER_SIZE / 2),
-		(player_pos.y + (float)PLAYER_SIZE / 2),
-		((float)PLAYER_SIZE / 2),
-		(enemy_pos.x + (float)ENEMY_COLLISION_SIZE / 2),
-		(enemy_pos.y + (float)ENEMY_COLLISION_SIZE / 2),
-		((float)ENEMY_COLLISION_SIZE / 2)))
+	if (Collision::IsHitCircle((player_pos.x + (float)PLAYER_SIZE_R),
+		(player_pos.y + (float)PLAYER_SIZE_R),
+		((float)PLAYER_SIZE_R),
+		(enemy_pos.x + (float)ENEMY_COLLISION_SIZE_R),
+		(enemy_pos.y + (float)ENEMY_COLLISION_SIZE_R),
+		((float)ENEMY_COLLISION_SIZE_R)))
 	{
 		return true;
 	}

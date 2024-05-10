@@ -24,15 +24,15 @@ void Enemy_Info::Step(VECTOR player_pos)
 void Enemy_Info::Draw(int handle)
 {
 	if (m_isUse) {
-		DrawCircle((int)(m_pos.x - Screen::m_screen_pos.x + ENEMY_COLLISION_SIZE / 2),
-			(int)(m_pos.y - Screen::m_screen_pos.y + ENEMY_COLLISION_SIZE / 2),
-			ENEMY_COLLISION_SIZE / 2,
+		DrawCircle((int)(m_pos.x - Screen::m_screen_pos.x),
+			(int)(m_pos.y - Screen::m_screen_pos.y),
+			ENEMY_COLLISION_SIZE_R,
 			GetColor(0, 255, 0), true);
 
-		DrawExtendGraph((int)(m_pos.x - Screen::m_screen_pos.x),
-			(int)(m_pos.y - Screen::m_screen_pos.y),
-			(int)(m_pos.x - Screen::m_screen_pos.x + ENEMY_COLLISION_SIZE),
-			(int)(m_pos.y - Screen::m_screen_pos.y + ENEMY_COLLISION_SIZE),
+		DrawExtendGraph((int)(m_pos.x - Screen::m_screen_pos.x - ENEMY_COLLISION_SIZE_R),
+			(int)(m_pos.y - Screen::m_screen_pos.y - ENEMY_COLLISION_SIZE_R),
+			(int)(m_pos.x - Screen::m_screen_pos.x + ENEMY_COLLISION_SIZE_R),
+			(int)(m_pos.y - Screen::m_screen_pos.y + ENEMY_COLLISION_SIZE_R),
 			handle, true);
 	}
 }
@@ -53,25 +53,25 @@ bool Enemy_Info::Spawn()
 	switch (spawn_pos_rand) {
 	case 0: {
 		//âE
-		m_pos.x = Screen::m_screen_pos.x + SCREEN_SIZE_X + ENEMY_COLLISION_SIZE;
+		m_pos.x = Screen::m_screen_pos.x + SCREEN_SIZE_X + ENEMY_COLLISION_SIZE_R * 2;
 		m_pos.y = GetRand(SCREEN_SIZE_Y) + Screen::m_screen_pos.y;
 		break;
 	}
 	case 1: {
 		//ç∂
-		m_pos.x = Screen::m_screen_pos.x - ENEMY_COLLISION_SIZE;
+		m_pos.x = Screen::m_screen_pos.x - ENEMY_COLLISION_SIZE_R * 2;
 		m_pos.y = GetRand(SCREEN_SIZE_Y) + Screen::m_screen_pos.y;
 		break;
 	}
 	case 2: {
 		//è„
-		m_pos.y = Screen::m_screen_pos.y - ENEMY_COLLISION_SIZE;
+		m_pos.y = Screen::m_screen_pos.y - ENEMY_COLLISION_SIZE_R * 2;
 		m_pos.x = GetRand(SCREEN_SIZE_X) + Screen::m_screen_pos.x;
 		break;
 	}
 	case 3: {
 		//â∫
-		m_pos.y = Screen::m_screen_pos.y + SCREEN_SIZE_Y + ENEMY_COLLISION_SIZE;
+		m_pos.y = Screen::m_screen_pos.y + SCREEN_SIZE_Y + ENEMY_COLLISION_SIZE_R * 2;
 		m_pos.x = GetRand(SCREEN_SIZE_X) + Screen::m_screen_pos.x;
 		break;
 	}

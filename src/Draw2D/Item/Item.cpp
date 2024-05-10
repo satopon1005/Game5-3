@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "Item.h"
+#include "../../Screen/Screen.h"
 
 void Item::Init()
 {
@@ -17,7 +18,11 @@ void Item::Step()
 void Item::Draw(int handle)
 {
 	if (m_isUse) {
-
+		DrawExtendGraph((int)(m_pos.x - ITEM_SIZE_R[m_item_type] / 2),
+			(int)(m_pos.y - ITEM_SIZE_R[m_item_type] / 2),
+			(int)(m_pos.x + ITEM_SIZE_R[m_item_type] / 2),
+			(int)(m_pos.y + ITEM_SIZE_R[m_item_type] / 2),
+			handle, true);
 	}
 }
 

@@ -10,7 +10,7 @@ enum EnemyType
 
 constexpr char ENEMY_HANDLE_PATH[64] = { "data/Enemy/Bat.png" };
 
-constexpr int ENEMY_COLLISION_SIZE = 40;
+constexpr int ENEMY_COLLISION_SIZE_R = 20;
 
 constexpr float ENEMY_SPEED = 2.0f;
 

@@ -39,15 +39,15 @@ void Player::Step()
 
 void Player::Draw()
 {
-	DrawCircle((int)(PlayerPos.x - Screen::m_screen_pos.x + PLAYER_SIZE / 2),
-		(int)(PlayerPos.y - Screen::m_screen_pos.y + PLAYER_SIZE / 2),
-		PLAYER_SIZE / 2,
+	DrawCircle((int)(PlayerPos.x - Screen::m_screen_pos.x),
+		(int)(PlayerPos.y - Screen::m_screen_pos.y),
+		PLAYER_SIZE_R,
 		GetColor(0, 0, 255), true);
 
-	DrawExtendGraph((int)(PlayerPos.x - Screen::m_screen_pos.x),
-		(int)(PlayerPos.y - Screen::m_screen_pos.y),
-		(int)(PlayerPos.x + PLAYER_SIZE - Screen::m_screen_pos.x),
-		(int)(PlayerPos.y + PLAYER_SIZE - Screen::m_screen_pos.y),
+	DrawExtendGraph((int)(PlayerPos.x - PLAYER_SIZE_R - Screen::m_screen_pos.x),
+		(int)(PlayerPos.y - PLAYER_SIZE_R - Screen::m_screen_pos.y),
+		(int)(PlayerPos.x + PLAYER_SIZE_R - Screen::m_screen_pos.x),
+		(int)(PlayerPos.y + PLAYER_SIZE_R - Screen::m_screen_pos.y),
 		handle,
 		true);
 	DrawFormatString(0, 15, GetColor(255, 255, 255), "マウス座標X:%d,座標Y:%d", MousePosX, MousePosY);

@@ -3,7 +3,7 @@
 #include "../Bullet/Bullet.h"
 
 const char PLAYER_PATH[] = { "data/Player/knight.png" };
-const int PLAYER_SIZE = 40;
+const int PLAYER_SIZE_R = 20;
 
 class Player
 {
