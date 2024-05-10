@@ -39,6 +39,11 @@ void Player::Step()
 
 void Player::Draw()
 {
+	DrawCircle((int)(PlayerPos.x - Screen::m_screen_pos.x + PLAYER_SIZE / 2),
+		(int)(PlayerPos.y - Screen::m_screen_pos.y + PLAYER_SIZE / 2),
+		PLAYER_SIZE / 2,
+		GetColor(0, 0, 255), true);
+
 	DrawExtendGraph((int)(PlayerPos.x - Screen::m_screen_pos.x),
 		(int)(PlayerPos.y - Screen::m_screen_pos.y),
 		(int)(PlayerPos.x + PLAYER_SIZE - Screen::m_screen_pos.x),

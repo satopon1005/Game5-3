@@ -1,6 +1,6 @@
 #pragma once
 #include "../MapChip/MapChip.h"
 
-void CollisionPlayerToWall(MapChip& mapchip_info, VECTOR& player_pos);
+void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos);
 
-void CollisionPlayerToEnemy(VECTOR player_pos, VECTOR enemy_pos);
+bool CollisionPlayerToEnemy(VECTOR player_pos, VECTOR enemy_pos);

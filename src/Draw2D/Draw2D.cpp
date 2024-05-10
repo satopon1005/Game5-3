@@ -6,8 +6,6 @@ Draw2D::Draw2D()
 
 	m_pos = { 0 };
 	m_isUse = 0;
-	m_coliision_size = { 0 };
-	m_coliision_size_r = 0;
 }
 Draw2D::~Draw2D()
 {
@@ -15,7 +13,14 @@ Draw2D::~Draw2D()
 		FinHandle();
 }
 
-void Draw2D::LoadHandle(char* handle_path,
+void Draw2D::LoadHandle(char* handle_path)
+{
+	m_handle = new int[1];
+
+	m_handle[0] = LoadGraph(handle_path);
+}
+
+void Draw2D::LoadDivHandle(char* handle_path,
 	int ANum,
 	int Xnum,
 	int Ynum,
