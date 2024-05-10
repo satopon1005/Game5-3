@@ -4,11 +4,19 @@
 #include "../Player/Player.h"
 #include "../Draw2D/Enemy/Enemy.h"
 
+bool ChackWallIndex(int wall_index) {
+	if (wall_index < MapChipType::WallMaxNum ||
+		wall_index == MapChipType::Tsuta)
+		return true;
+	return false;
+}
+
 void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 {
 	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
 		for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
-			if (mapchip_info.GetMapChipHandleIndex(y_index, x_index) == MapChipType::Floor)
+			if (mapchip_info.GetMapChipHandleIndex(y_index, x_index) == MapChipType::Floor1 ||
+				mapchip_info.GetMapChipHandleIndex(y_index, x_index) == MapChipType::Floor2)
 				continue;
 
 			if (Collision::IsHitRect((float)(x_index * MAPCHIP_SIZE),
@@ -42,17 +50,17 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 					int down_wall_index = mapchip_info.GetMapChipHandleIndex(y_index + 1, x_index);
 
 					//その壁の右と下両方が壁のとき
-					if (right_wall_index == MapChipType::Wall &&
-						down_wall_index == MapChipType::Wall) {
+					if (ChackWallIndex(right_wall_index) &&
+						ChackWallIndex(down_wall_index)) {
 						pos.x += overlap_x;
 						pos.y += overlap_y;
 					}
 					//その壁の右が壁のとき
-					else if (right_wall_index == MapChipType::Wall) {
+					else if (ChackWallIndex(right_wall_index)) {
 						pos.y += overlap_y;
 					}
 					//その壁の下が壁のとき
-					else if (down_wall_index == MapChipType::Wall) {
+					else if (ChackWallIndex(down_wall_index)) {
 						pos.x += overlap_x;
 					}
 					//その壁の右と下両方に壁がないとき
@@ -69,17 +77,17 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 					int down_wall_index = mapchip_info.GetMapChipHandleIndex(y_index + 1, x_index);
 
 					//その壁の左と下両方が壁のとき
-					if (left_wall_index == MapChipType::Wall &&
-						down_wall_index == MapChipType::Wall) {
+					if (ChackWallIndex(left_wall_index) &&
+						ChackWallIndex(down_wall_index)) {
 						pos.x -= overlap_x;
 						pos.y += overlap_y;
 					}
 					//その壁の左が壁のとき
-					else if (left_wall_index == MapChipType::Wall) {
+					else if (ChackWallIndex(left_wall_index)) {
 						pos.y += overlap_y;
 					}
 					//その壁の下が壁のとき
-					else if (down_wall_index == MapChipType::Wall) {
+					else if (ChackWallIndex(down_wall_index)) {
 						pos.x -= overlap_x;
 					}
 					//その壁の左と下両方に壁がないとき
@@ -96,17 +104,17 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 					int up_wall_index = mapchip_info.GetMapChipHandleIndex(y_index - 1, x_index);
 
 					//その壁の左と上両方が壁のとき
-					if (left_wall_index == MapChipType::Wall &&
-						up_wall_index == MapChipType::Wall) {
+					if (ChackWallIndex(left_wall_index) &&
+						ChackWallIndex(up_wall_index)) {
 						pos.x -= overlap_x;
 						pos.y -= overlap_y;
 					}
 					//その壁の左が壁のとき
-					else if (left_wall_index == MapChipType::Wall) {
+					else if (ChackWallIndex(left_wall_index)) {
 						pos.y -= overlap_y;
 					}
 					//その壁の上が壁のとき
-					else if (up_wall_index == MapChipType::Wall) {
+					else if (ChackWallIndex(up_wall_index)) {
 						pos.x -= overlap_x;
 					}
 					//その壁の右と上両方に壁がないとき
@@ -123,17 +131,17 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 					int up_wall_index = mapchip_info.GetMapChipHandleIndex(y_index - 1, x_index);
 
 					//その壁の右と上両方が壁のとき
-					if (right_wall_index == MapChipType::Wall &&
-						up_wall_index == MapChipType::Wall) {
+					if (ChackWallIndex(right_wall_index) &&
+						ChackWallIndex(up_wall_index)) {
 						pos.x += overlap_x;
 						pos.y -= overlap_y;
 					}
 					//その壁の右が壁のとき
-					else if (right_wall_index == MapChipType::Wall) {
+					else if (ChackWallIndex(right_wall_index)) {
 						pos.y -= overlap_y;
 					}
 					//その壁の上が壁のとき
-					else if (up_wall_index == MapChipType::Wall) {
+					else if (ChackWallIndex(up_wall_index)) {
 						pos.x += overlap_x;
 					}
 					//その壁の右と上両方に壁がないとき

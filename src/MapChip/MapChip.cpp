@@ -7,6 +7,10 @@ int MapChip::m_mapchip_index;
 
 MapChip::MapChip()
 {
+	for (int i = 0; i < MapChipTypeMaxNum; i++) {
+		m_handle[i] = 0;
+	}
+
 	m_mapchip_file_num = 0;
 	for (int i = 0; i < MAPCHIP_NUM_Y; i++)
 		for (int j = 0; j < MAPCHIP_NUM_X; j++)
@@ -26,10 +30,11 @@ MapChip::~MapChip()
 
 void MapChip::InitEdit()
 {
+	LoadMapHandle();
 	LoadMapNum();
 	for (int i = 0; i < MAPCHIP_NUM_Y; i++)
 		for (int j = 0; j < MAPCHIP_NUM_X; j++)
-			m_mapchip_handle_index[i][j] = Floor;
+			m_mapchip_handle_index[i][j] = Floor1;
 
 	m_mapchip_file_name = new char*;
 	m_mapchip_file_name[0] = new char[64];
@@ -41,6 +46,7 @@ void MapChip::Init()
 }
 void MapChip::Init(int index)
 {
+	LoadMapHandle();
 	Init();
 	LoadMapChip(index);
 }
@@ -59,21 +65,46 @@ void MapChip::StepEdit()
 		Input::GetMousePosY() > 0 && Input::GetMousePosY() < SCREEN_SIZE_Y) {
 
 		if (Input::IsKeyDown(KEY_INPUT_1)) {
-			m_mapchip_handle_index[y_index][x_index] = Wall;
+			if (m_mapchip_handle_index[y_index][x_index] >= WallMaxNum) {
+
+				int wall_rand = GetRand(9);
+				switch (wall_rand) {
+				case 0: {
+					m_mapchip_handle_index[y_index][x_index] = Wall2;
+					break;
+				}
+				case 1: {
+					m_mapchip_handle_index[y_index][x_index] = Wall3;
+					break;
+				}
+				default: {
+					m_mapchip_handle_index[y_index][x_index] = Wall1;
+				}
+				}
+			}
 		}
 		if (Input::IsKeyDown(KEY_INPUT_2)) {
-			m_mapchip_handle_index[y_index][x_index] = Floor;
+			m_mapchip_handle_index[y_index][x_index] = Tsuta;
+		}
+		if (Input::IsKeyDown(KEY_INPUT_3)) {
+			m_mapchip_handle_index[y_index][x_index] = Floor1;
+		}
+		if (Input::IsKeyDown(KEY_INPUT_4)) {
+			m_mapchip_handle_index[y_index][x_index] = Floor2;
+		}
+		if (Input::IsKeyDown(KEY_INPUT_5)) {
+			m_mapchip_handle_index[y_index][x_index] = Floor2;
 		}
 	}
 
 	//マップの端を壁にする
 	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
-		m_mapchip_handle_index[y_index][0] = Wall;
-		m_mapchip_handle_index[y_index][MAPCHIP_NUM_X - 1] = Wall;
+		m_mapchip_handle_index[y_index][0] = Wall1;
+		m_mapchip_handle_index[y_index][MAPCHIP_NUM_X - 1] = Wall1;
 	}
 	for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
-		m_mapchip_handle_index[0][x_index] = Wall;
-		m_mapchip_handle_index[MAPCHIP_NUM_Y - 1][x_index] = Wall;
+		m_mapchip_handle_index[0][x_index] = Wall1;
+		m_mapchip_handle_index[MAPCHIP_NUM_Y - 1][x_index] = Wall1;
 	}
 }
 
@@ -105,25 +136,20 @@ void MapChip::Draw()
 {
 	for (int y_index = 0; y_index < MAPCHIP_NUM_Y; y_index++) {
 		for (int x_index = 0; x_index < MAPCHIP_NUM_X; x_index++) {
-			int color = GetColor(255, 255, 255);
 
-			switch (m_mapchip_handle_index[y_index][x_index]) {
-			case Wall: {
-				color = GetColor(255, 0, 0);
-				break;
-			}
-			case Floor: {
-				color = GetColor(0, 0, 0);
-				break;
-			}
-			}
-
-			
-			DrawBox((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
-					(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x), (int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
-					color, true);
+			DrawExtendGraph((int)(x_index * MAPCHIP_SIZE - Screen::m_screen_pos.x),
+				(int)(y_index * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+				(int)((x_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.x),
+				(int)((y_index + 1) * MAPCHIP_SIZE - Screen::m_screen_pos.y),
+				m_handle[m_mapchip_handle_index[y_index][x_index]],
+				true);
 		}
 	}
+}
+
+void MapChip::LoadMapHandle()
+{
+	LoadDivGraph(MAPCHIP_HANDLE_PATH, MapChipTypeMaxNum, 4, 4, 50, 50, m_handle);
 }
 
 //マップチップデータが保存されているファイルの名前を取得
