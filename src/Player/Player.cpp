@@ -64,16 +64,6 @@ void Player::Fin()
 
 }
 
-bool Player::IsShot()
-{
-	if (GetMouseInput() && MOUSE_INPUT_LEFT != 0)
-	{
-		return true;
-	}
-
-	return false;
-}
-
 //’e‚ÌˆÚ“®ŠÖ”?
 //void Player::Move(VECTOR playerPos, VECTOR BulletPos)
 //{

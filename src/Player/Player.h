@@ -30,7 +30,5 @@ public:
 	float GetPosX(){return PlayerPos.x;}
 	float GetPosY(){return PlayerPos.y;}
 
-	bool IsShot();
-
 	VECTOR& GetPos() { return PlayerPos; }
 };
