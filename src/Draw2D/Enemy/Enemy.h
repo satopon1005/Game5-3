@@ -3,12 +3,16 @@
 
 enum EnemyType
 {
-	Enemy1,
+	Wood,
+	Eye,
+	Ghost,
+	Bat_mini,
+	Bat,
 
 	EnemyTypeMaxNum
 };
 
-constexpr char ENEMY_HANDLE_PATH[] = { "data/Enemy/Bat.png" };
+constexpr char ENEMY_HANDLE_PATH[] = { "data/Enemy/monster.png" };
 
 constexpr int ENEMY_COLLISION_SIZE_R = 20;
 

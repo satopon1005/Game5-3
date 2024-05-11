@@ -10,7 +10,7 @@ void EnemyManager::Init()
 	}
 	m_spawn_interval_count = 0;
 
-	LoadDivGraph(ENEMY_HANDLE_PATH, 1, 1, 1, 256, 256, m_handle);
+	LoadDivGraph(ENEMY_HANDLE_PATH, EnemyTypeMaxNum, EnemyTypeMaxNum, 1, 150, 150, m_handle);
 }
 void EnemyManager::Step(VECTOR player_pos)
 {
