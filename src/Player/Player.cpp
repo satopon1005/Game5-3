@@ -14,7 +14,7 @@ void Player::Init()
 	
 }
 
-void Player::Step()
+void Player::Step(CBulletMaster& bulletmaster)
 {
 	if (Input::IsKeyKeep(KEY_INPUT_D))
 	{
@@ -35,6 +35,11 @@ void Player::Step()
 
 	GetMousePoint(&MousePosX, &MousePosY);
 
+	wait--;
+	if (wait < 0) {
+		bulletmaster.RequestNormalShot(PlayerPos, 10.0f);
+		wait = Wait;
+	}
 }
 
 void Player::Draw()

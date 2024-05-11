@@ -5,6 +5,8 @@
 const char PLAYER_PATH[] = { "data/Player/knight.png" };
 const int PLAYER_SIZE_R = 20;
 
+const float Wait = 30.0f;
+
 class Player
 {
 private:
@@ -15,10 +17,11 @@ private:
 
 	VECTOR PlayerPos;
 
+	float wait;
 public:
 
 	void Init();
-	void Step();
+	void Step(CBulletMaster& bulletmaster);
 	void Move(VECTOR playerPos, VECTOR bulletPos);
 
 	void Draw();
