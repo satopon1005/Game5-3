@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "../../Draw2D/Item/ItemManager.h"
 
 constexpr int ENEMY_NUM = 100;
 constexpr int ENEMY_SPAWN_INTERVAL_COUNT = 30;
@@ -19,4 +20,6 @@ public:
 	void Fin();
 
 	void Spawn();
+
+	Enemy_Info& GetEnemyInfo(int index) { return enemy_info[index]; }
 };

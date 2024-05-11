@@ -11,8 +11,10 @@ enum ItemType
 
 constexpr int ITEM_SIZE_R[ItemTypeMaxNum] = {
 	15,		//Potion
-	10,		//Keikenchi
+	30,		//Keikenchi
 };
+
+constexpr char ITEM_HANDLE_PATH[] = { "data/item/item.png" };
 
 class Item :public Draw2D
 {
@@ -25,4 +27,6 @@ public:
 	void Draw(int handle);
 
 	bool Spawn(VECTOR pos, int item_type);
+
+	int GetItemType() { return m_item_type; }
 };

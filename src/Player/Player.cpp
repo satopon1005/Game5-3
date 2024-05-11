@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "../Input/Input.h"
 #include "../Screen/Screen.h"
+#include "../Draw2D/Item/Item.h"
 
 
 void Player::Init()
@@ -14,7 +15,7 @@ void Player::Init()
 	
 }
 
-void Player::Step(CBulletMaster& bulletmaster)
+void Player::Step()
 {
 	if (Input::IsKeyKeep(KEY_INPUT_D))
 	{
@@ -31,14 +32,6 @@ void Player::Step(CBulletMaster& bulletmaster)
 	if (Input::IsKeyKeep(KEY_INPUT_S))
 	{
 		PlayerPos.y += speed;
-	}
-
-	GetMousePoint(&MousePosX, &MousePosY);
-
-	wait--;
-	if (wait < 0) {
-		bulletmaster.RequestNormalShot(PlayerPos, 10.0f);
-		wait = Wait;
 	}
 }
 
@@ -62,6 +55,19 @@ void Player::Draw()
 void Player::Fin()
 {
 
+}
+
+//ƒAƒCƒeƒ€‚ðŽæ“¾‚µ‚½Žž‚Ìˆ—
+void Player::IsGetItem(int item_type)
+{
+	switch (item_type) {
+	case ItemType::Potion: {
+		break;
+	}
+	case ItemType::Keikenchi: {
+		break;
+	}
+	}
 }
 
 //’e‚ÌˆÚ“®ŠÖ”?

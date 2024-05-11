@@ -1,6 +1,5 @@
 #pragma once
 #include "DxLib.h"
-#include "../Bullet/Bullet.h"
 
 const char PLAYER_PATH[] = { "data/Player/knight.png" };
 const int PLAYER_SIZE_R = 20;
@@ -16,16 +15,16 @@ private:
 	int MousePosX, MousePosY;
 
 	VECTOR PlayerPos;
-
-	float wait;
 public:
 
 	void Init();
-	void Step(CBulletMaster& bulletmaster);
+	void Step();
 	void Move(VECTOR playerPos, VECTOR bulletPos);
 
 	void Draw();
 	void Fin();
+
+	void IsGetItem(int item_type);
 
 	float GetPosX(){return PlayerPos.x;}
 	float GetPosY(){return PlayerPos.y;}

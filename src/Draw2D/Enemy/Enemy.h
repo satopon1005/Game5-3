@@ -8,7 +8,7 @@ enum EnemyType
 	EnemyTypeMaxNum
 };
 
-constexpr char ENEMY_HANDLE_PATH[64] = { "data/Enemy/Bat.png" };
+constexpr char ENEMY_HANDLE_PATH[] = { "data/Enemy/Bat.png" };
 
 constexpr int ENEMY_COLLISION_SIZE_R = 20;
 

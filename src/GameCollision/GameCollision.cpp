@@ -157,17 +157,55 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 	}
 }
 
-bool CollisionPlayerToEnemy(VECTOR player_pos, VECTOR enemy_pos)
+bool CollisionObjectsCircle(VECTOR objects_1, int collision_size1, VECTOR objects_2, int collision_size2)
 {
-	if (Collision::IsHitCircle((player_pos.x + (float)PLAYER_SIZE_R),
-		(player_pos.y + (float)PLAYER_SIZE_R),
-		((float)PLAYER_SIZE_R),
-		(enemy_pos.x + (float)ENEMY_COLLISION_SIZE_R),
-		(enemy_pos.y + (float)ENEMY_COLLISION_SIZE_R),
-		((float)ENEMY_COLLISION_SIZE_R)))
+	if (Collision::IsHitCircle((objects_1.x + (float)collision_size1),
+		(objects_1.y + (float)collision_size1),
+		((float)collision_size1),
+		(objects_2.x + (float)collision_size2),
+		(objects_2.y + (float)collision_size2),
+		((float)collision_size2)))
 	{
 		return true;
 	}
 
 	return false;
+}
+
+void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info, ItemManager& item_info)
+{
+	for (int enemy_index = 0; enemy_index < ENEMY_NUM; enemy_index++) {
+		if (!enemy_info.GetEnemyInfo(enemy_index).GetIsUse()) continue;
+
+		for (int bullet_index = 0; bullet_index < BULLET_MAX_NUM; bullet_index++) {
+			if (!bullet_info.GetBulletInfo(bullet_index).GetIsUse()) continue;
+
+			if(CollisionObjectsCircle(enemy_info.GetEnemyInfo(enemy_index).GetPos(),
+									ENEMY_COLLISION_SIZE_R,
+									bullet_info.GetBulletInfo(bullet_index).GetPos(),
+									BULLET_COLLISION_SIZE_R[bullet_info.GetBulletInfo(bullet_index).GetBulletType()]))
+			{
+				enemy_info.GetEnemyInfo(enemy_index).SetIsUse(false);
+				bullet_info.GetBulletInfo(bullet_index).SetIsUse(false);
+				item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), Keikenchi);
+			}
+		}
+	}
+}
+
+int CollisionItemToPlayer(ItemManager& item_info, VECTOR player_pos)
+{
+	for (int item_index = 0; item_index < ITEM_MAX_NUM; item_index++) {
+		if (!item_info.GetItemInfo(item_index).GetIsUse()) continue;
+
+		if (CollisionObjectsCircle(player_pos,
+			PLAYER_SIZE_R,
+			item_info.GetItemInfo(item_index).GetPos(),
+			ITEM_SIZE_R[item_info.GetItemInfo(item_index).GetItemType()]))
+		{
+			item_info.GetItemInfo(item_index).SetIsUse(false);
+			return item_info.GetItemInfo(item_index).GetItemType();
+		}
+	}
+	return -1;
 }

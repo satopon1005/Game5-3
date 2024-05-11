@@ -1,6 +1,7 @@
 #include "DxLib.h"
-#include "EnemyManagerh.h"
+#include "EnemyManager.h"
 #include "../../GameCollision/GameCollision.h"
+#include "../../Player/Player.h"
 
 void EnemyManager::Init()
 {
@@ -18,8 +19,9 @@ void EnemyManager::Step(VECTOR player_pos)
 
 		enemy_info[i].Step(player_pos);
 
-		if (CollisionPlayerToEnemy(player_pos, enemy_info[i].GetPos()))
+		if (CollisionObjectsCircle(player_pos, PLAYER_SIZE_R, enemy_info[i].GetPos(), ENEMY_COLLISION_SIZE_R)) {
 			enemy_info[i].SetIsUse(false);
+		}
 	}
 	m_spawn_interval_count++;
 }

@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "Item.h"
 #include "../../Screen/Screen.h"
+#include "../../Common.h"
 
 void Item::Init()
 {
@@ -12,16 +13,21 @@ void Item::Init()
 void Item::Step()
 {
 	if (m_isUse) {
-
+		if (m_pos.x - Screen::m_screen_pos.x + ITEM_SIZE_R[m_item_type] / 2 < 0 ||
+			m_pos.y - Screen::m_screen_pos.y + ITEM_SIZE_R[m_item_type] / 2 < 0 ||
+			m_pos.x - Screen::m_screen_pos.x - ITEM_SIZE_R[m_item_type] / 2 > SCREEN_SIZE_X ||
+			m_pos.y - Screen::m_screen_pos.y - ITEM_SIZE_R[m_item_type] / 2 > SCREEN_SIZE_Y) {
+			m_isUse = false;
+		}
 	}
 }
 void Item::Draw(int handle)
 {
 	if (m_isUse) {
-		DrawExtendGraph((int)(m_pos.x - ITEM_SIZE_R[m_item_type] / 2),
-			(int)(m_pos.y - ITEM_SIZE_R[m_item_type] / 2),
-			(int)(m_pos.x + ITEM_SIZE_R[m_item_type] / 2),
-			(int)(m_pos.y + ITEM_SIZE_R[m_item_type] / 2),
+		DrawExtendGraph((int)(m_pos.x - ITEM_SIZE_R[m_item_type] / 2 - Screen::m_screen_pos.x),
+			(int)(m_pos.y - ITEM_SIZE_R[m_item_type] / 2 - Screen::m_screen_pos.y),
+			(int)(m_pos.x + ITEM_SIZE_R[m_item_type] / 2 - Screen::m_screen_pos.x),
+			(int)(m_pos.y + ITEM_SIZE_R[m_item_type] / 2 - Screen::m_screen_pos.y),
 			handle, true);
 	}
 }
