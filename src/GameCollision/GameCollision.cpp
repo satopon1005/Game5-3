@@ -159,11 +159,11 @@ void CollisionObjectsToWall(MapChip& mapchip_info, VECTOR& pos)
 
 bool CollisionObjectsCircle(VECTOR objects_1, int collision_size1, VECTOR objects_2, int collision_size2)
 {
-	if (Collision::IsHitCircle((objects_1.x + (float)collision_size1),
-		(objects_1.y + (float)collision_size1),
+	if (Collision::IsHitCircle((objects_1.x),
+		(objects_1.y),
 		((float)collision_size1),
-		(objects_2.x + (float)collision_size2),
-		(objects_2.y + (float)collision_size2),
+		(objects_2.x),
+		(objects_2.y),
 		((float)collision_size2)))
 	{
 		return true;

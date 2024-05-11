@@ -12,8 +12,6 @@ private:
 	int handle;
 	int speed;
 
-	int MousePosX, MousePosY;
-
 	VECTOR PlayerPos;
 public:
 

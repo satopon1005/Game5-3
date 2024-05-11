@@ -62,12 +62,12 @@ void Bullet::Draw(int handle)
 				BULLET_COLLISION_SIZE_R[m_bullet_type],
 				GetColor(255, 0, 0), true);
 
-			/*DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+			DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
 				((double)BULLET_DISPLAY_SIZE[m_bullet_type] / (double)BULLET_GAZOU_SIZE[m_bullet_type]),
 				(double)m_move_angle,
 				handle,
-				true);*/
+				true);
 			break;
 		}
 		}

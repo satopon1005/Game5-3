@@ -14,8 +14,6 @@ void ScenePlay::Init()
 
 	bullet_info.Init();
 
-	//normal.Init();
-
 	Screen::Init();
 }
 void ScenePlay::Step()
@@ -41,8 +39,6 @@ void ScenePlay::Step()
 	if (int item_type = CollisionItemToPlayer(item_info, player_info.GetPos()) != -1) {
 		player_info.IsGetItem(item_type);
 	}
-
-	//normal.Step();
 }
 void ScenePlay::Draw()
 {
@@ -54,8 +50,6 @@ void ScenePlay::Draw()
 	enemy_info.Draw();
 
 	item_info.Draw();
-
-	//normal.Draw();
 
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "ƒvƒŒƒC");
 }

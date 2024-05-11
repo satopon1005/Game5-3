@@ -16,8 +16,6 @@ private:
 
 	BulletManager bullet_info;
 
-	//CBulletMaster normal;
-
 public:
 	void Init();
 	void Step();
