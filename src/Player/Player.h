@@ -6,6 +6,10 @@ constexpr int PLAYER_SIZE_R = 20;
 
 constexpr float Wait = 30.0f;
 
+constexpr int DEFAULT_LEVELUP_NECESSARY_KEIKENCHI = 10;
+
+constexpr int PLAYER_DEFAULT_HP = 1000;
+
 class Player
 {
 private:
@@ -13,6 +17,11 @@ private:
 	int speed;
 
 	VECTOR PlayerPos;
+
+	int m_hp;
+
+	int m_level;
+	int m_keikenchi;
 public:
 
 	void Init();
@@ -27,4 +36,8 @@ public:
 	float GetPosY(){return PlayerPos.y;}
 
 	VECTOR& GetPos() { return PlayerPos; }
+
+	int GetHP() { return m_hp; }
+	int GetLevel() { return m_level; }
+	int GetKeikenchi() { return m_keikenchi; }
 };

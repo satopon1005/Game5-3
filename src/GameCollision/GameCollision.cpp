@@ -181,7 +181,7 @@ void CollisionPlayerToEnemy(Player& player_info, EnemyManager& enemy_info)
 									enemy_info.GetEnemyInfo(enemy_index).GetPos(),
 									ENEMY_COLLISION_SIZE_R))
 		{
-
+			
 		}
 	}
 }

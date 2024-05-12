@@ -5,6 +5,7 @@
 #include "../../Draw2D/Enemy/EnemyManager.h"
 #include "../../Draw2D/Item/ItemManager.h"
 #include "../../Draw2D/Bullet/BulletManager.h"
+#include "../../UI/UI.h"
 
 class ScenePlay :public SceneBace
 {
@@ -13,6 +14,8 @@ private:
 	Player player_info;
 	EnemyManager enemy_info;
 	ItemManager item_info;
+
+	UI_Info ui_info;
 
 	BulletManager bullet_info;
 

@@ -14,6 +14,8 @@ void ScenePlay::Init()
 
 	bullet_info.Init();
 
+	ui_info.Init();
+
 	Screen::Init();
 }
 void ScenePlay::Step()
@@ -51,6 +53,9 @@ void ScenePlay::Draw()
 	enemy_info.Draw();
 
 	item_info.Draw();
+
+
+	ui_info.Draw(player_info.GetHP(), player_info.GetKeikenchi(), player_info.GetLevel());
 }
 void ScenePlay::Fin()
 {

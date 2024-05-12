@@ -12,7 +12,10 @@ void Player::Init()
 
 	handle = LoadGraph(PLAYER_PATH);
 
-	
+	m_level = 0;
+	m_keikenchi = 0;
+
+	m_hp = PLAYER_DEFAULT_HP;
 }
 
 void Player::Step()
@@ -63,6 +66,11 @@ void Player::IsGetItem(int item_type)
 		break;
 	}
 	case ItemType::Keikenchi: {
+		m_keikenchi++;
+		if (m_keikenchi >= DEFAULT_LEVELUP_NECESSARY_KEIKENCHI + (m_level * 5)) {
+			m_level++;
+			m_keikenchi = 0;
+		}
 		break;
 	}
 	}
