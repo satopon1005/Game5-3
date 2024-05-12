@@ -3,11 +3,11 @@
 
 enum EnemyType
 {
-	Wood,
-	Eye,
-	Ghost,
 	Bat_mini,
 	Bat,
+	Ghost,
+	Wood,
+	Eye,
 
 	EnemyTypeMaxNum
 };
@@ -17,6 +17,14 @@ constexpr char ENEMY_HANDLE_PATH[] = { "data/Enemy/monster.png" };
 constexpr int ENEMY_COLLISION_SIZE_R = 20;
 
 constexpr float ENEMY_SPEED = 2.0f;
+
+constexpr int ENEMY_DEFAULT_HP[EnemyTypeMaxNum] = {
+	500,
+	500,
+	700,
+	1000,
+	400,
+};
 
 class Enemy_Info :public Draw2D
 {

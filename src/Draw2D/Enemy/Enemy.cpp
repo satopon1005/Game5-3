@@ -11,6 +11,9 @@ void Enemy_Info::Init()
 
 	m_distination_pos = { 0 };
 	m_enemy_type = 0;
+
+	m_damage_effect_count = 0;
+	m_damage_effect_alpha = 255;
 }
 void Enemy_Info::Step(VECTOR player_pos)
 {
@@ -19,6 +22,15 @@ void Enemy_Info::Step(VECTOR player_pos)
 
 		m_pos.x += m_distination_pos.x;
 		m_pos.y += m_distination_pos.y;
+
+		if (m_damage_effect_alpha != 255) {
+			m_damage_effect_count++;
+
+			if (m_damage_effect_count >= DAMAGE_EFFECT_TIME) {
+				m_damage_effect_alpha = 255;
+				m_damage_effect_count = 0;
+			}
+		}
 	}
 }
 void Enemy_Info::Draw(int handle)
@@ -29,11 +41,13 @@ void Enemy_Info::Draw(int handle)
 			ENEMY_COLLISION_SIZE_R,
 			GetColor(0, 255, 0), true);
 
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_damage_effect_alpha);
 		DrawExtendGraph((int)(m_pos.x - Screen::m_screen_pos.x - ENEMY_COLLISION_SIZE_R),
 			(int)(m_pos.y - Screen::m_screen_pos.y - ENEMY_COLLISION_SIZE_R),
 			(int)(m_pos.x - Screen::m_screen_pos.x + ENEMY_COLLISION_SIZE_R),
 			(int)(m_pos.y - Screen::m_screen_pos.y + ENEMY_COLLISION_SIZE_R),
 			handle, true);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 	}
 }
 void Enemy_Info::Fin()
@@ -47,6 +61,10 @@ bool Enemy_Info::Spawn()
 
 	m_enemy_type = GetRand(EnemyTypeMaxNum - 1);
 	m_isUse = true;
+	m_hp = ENEMY_DEFAULT_HP[m_enemy_type];
+
+	m_damage_effect_count = 0;
+	m_damage_effect_alpha = 255;
 
 	int spawn_pos_rand = GetRand(3);
 

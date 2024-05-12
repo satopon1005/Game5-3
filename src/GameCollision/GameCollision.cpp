@@ -185,9 +185,11 @@ void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info
 									bullet_info.GetBulletInfo(bullet_index).GetPos(),
 									BULLET_COLLISION_SIZE_R[bullet_info.GetBulletInfo(bullet_index).GetBulletType()]))
 			{
-				enemy_info.GetEnemyInfo(enemy_index).SetIsUse(false);
+				enemy_info.GetEnemyInfo(enemy_index).IsDamage(BULLET_DAMAGE_NUM[bullet_info.GetBulletInfo(bullet_index).GetBulletType()]);
 				bullet_info.GetBulletInfo(bullet_index).SetIsUse(false);
-				item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), Keikenchi);
+
+				if (!enemy_info.GetEnemyInfo(enemy_index).GetIsUse())
+					item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), Keikenchi);
 			}
 		}
 	}

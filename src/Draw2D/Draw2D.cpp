@@ -4,6 +4,7 @@ Draw2D::Draw2D()
 {
 	m_handle = nullptr;
 
+	m_hp = 0;
 	m_pos = { 0 };
 	m_isUse = 0;
 }
@@ -42,4 +43,13 @@ void Draw2D::LoadDivHandle(char* handle_path,
 void Draw2D::FinHandle()
 {
 	delete m_handle;
+}
+
+void Draw2D::IsDamage(int damage)
+{
+	m_hp -= damage;
+	m_damage_effect_alpha = 120;
+
+	if (m_hp <= 0)
+		m_isUse = false;
 }

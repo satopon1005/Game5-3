@@ -54,6 +54,10 @@ constexpr int BULLET_CONTINUATION_SHOT_NUM[BulletTypeMaxNum] = {
 	3,3,1
 };
 
+constexpr int BULLET_DAMAGE_NUM[BulletTypeMaxNum] = {
+	500,700,300,
+};
+
 class Bullet :public Draw2D
 {
 private:
