@@ -44,7 +44,7 @@ void Bullet::Step()
 		//ƒjƒ“ƒjƒN
 		}
 
-		//m_anime_index.PlayAnimation(BULLET_ANIME_NUM[m_bullet_type], BULLET_ANIME_TIME[m_bullet_type]);
+		m_anime_index.PlayAnimation(BULLET_ANIME_NUM[m_bullet_type], BULLET_ANIME_TIME[m_bullet_type]);
 
 		if (m_pos.x - Screen::m_screen_pos.x < -BULLET_DISPLAY_SIZE_Y[m_bullet_type] ||
 			m_pos.y - Screen::m_screen_pos.y < -BULLET_DISPLAY_SIZE_Y[m_bullet_type] ||
