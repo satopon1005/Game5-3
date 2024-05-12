@@ -2,7 +2,7 @@
 #include "Bullet.h"
 
 constexpr int BULLET_MAX_NUM = 100;
-constexpr int BULLET_SPAWN_INTERVAL_COUNT = 10;
+constexpr int BULLET_SPAWN_INTERVAL_COUNT[BulletTypeMaxNum] = { 10,10,10,60 };
 
 class BulletManager
 {

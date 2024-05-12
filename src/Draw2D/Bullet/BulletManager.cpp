@@ -15,9 +15,6 @@ void BulletManager::Init()
 		m_spawn_interval_count[bullet_type_index] = 0;
 		m_bullet_usable_flag[bullet_type_index] = true;
 	}
-	for (int bullet_type_index = 0; bullet_type_index < BulletTypeMaxNum; bullet_type_index++) {
-		
-	}
 }
 void BulletManager::Step()
 {
@@ -58,7 +55,7 @@ void BulletManager::SpawnBullet(VECTOR player_pos)
 
 bool BulletManager::Spawn(VECTOR player_pos, int bullet_type)
 {
-	if (m_spawn_interval_count[bullet_type] < BULLET_SPAWN_INTERVAL_COUNT)
+	if (m_spawn_interval_count[bullet_type] < BULLET_SPAWN_INTERVAL_COUNT[bullet_type])
 		return false;
 
 	for (int bullet_index = 0; bullet_index < BULLET_MAX_NUM; bullet_index++) {

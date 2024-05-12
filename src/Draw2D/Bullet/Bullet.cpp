@@ -16,6 +16,8 @@ void Bullet::Init()
 	m_move_angle = 0.0f;
 
 	m_anime_index.Init();
+
+	m_display_count = 0;
 }
 void Bullet::Step()
 {
@@ -40,7 +42,13 @@ void Bullet::Step()
 			break;
 		}
 		//聖水
+		case Holywater: {
+			m_display_count++;
 
+			if (m_display_count > 3 * 60) {
+				m_isUse = false;
+			}
+		}
 		//ニンニク
 		}
 
@@ -60,13 +68,15 @@ void Bullet::Draw(int handle)
 		switch (m_bullet_type) {
 		//炎の杖
 		case fireball: {
-			DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+			/*DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
 				BULLET_COLLISION_SIZE_R[m_bullet_type],
-				GetColor(255, 255, 0), true);
+				GetColor(255, 255, 0), true);*/
 
-			DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+			DrawRotaGraph2((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
+				70,
+				50,
 				((double)BULLET_DISPLAY_SIZE_Y[m_bullet_type] / (double)BULLET_GAZOU_SIZE_Y[m_bullet_type]),
 				(double)m_move_angle,
 				handle,
@@ -75,13 +85,15 @@ void Bullet::Draw(int handle)
 		}
 		//魔弾
 		case magicbullet: {
-			DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+			/*DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
 				BULLET_COLLISION_SIZE_R[m_bullet_type],
-				GetColor(255, 0, 255), true);
+				GetColor(255, 0, 255), true);*/
 
-			DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+			DrawRotaGraph2((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
+				110,
+				35,
 				((double)BULLET_DISPLAY_SIZE_Y[m_bullet_type] / (double)BULLET_GAZOU_SIZE_Y[m_bullet_type]),
 				(double)m_move_angle,
 				handle,
@@ -90,10 +102,10 @@ void Bullet::Draw(int handle)
 		}
 		//斬撃
 		case Slashing: {
-			DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+			/*DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
 				BULLET_COLLISION_SIZE_R[m_bullet_type],
-				GetColor(255, 0, 0), true);
+				GetColor(255, 0, 0), true);*/
 
 			DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
@@ -104,7 +116,19 @@ void Bullet::Draw(int handle)
 			break;
 		}
 		//聖水
+		case Holywater: {
+			/*DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
+				BULLET_COLLISION_SIZE_R[m_bullet_type],
+				GetColor(255, 0, 0), true);*/
 
+			DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
+				((double)BULLET_DISPLAY_SIZE_Y[m_bullet_type] / (double)BULLET_GAZOU_SIZE_Y[m_bullet_type]),
+				0.0,
+				handle,
+				true);
+		}
 		//ニンニク
 		}
 	}
@@ -119,12 +143,12 @@ bool Bullet::Spawn(VECTOR player_pos, int bullet_type)
 	switch (m_bullet_type) {
 	//炎の杖
 	case fireball: {
-		//弾発射時の座標はプレイヤーの座標
-		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type],
-			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type],
-			0);
-
 		float angle = (float)GetRand((int)(DX_PI * 2 * 100)) / 100;
+
+		//弾発射時の座標はプレイヤーの座標
+		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type] + cosf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 2),
+			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type] + sinf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 2),
+			0);
 
 		m_angle = angle;
 		m_move_angle = angle;
@@ -132,11 +156,6 @@ bool Bullet::Spawn(VECTOR player_pos, int bullet_type)
 	}
 	//魔弾
 	case magicbullet: {
-		//弾発射時の座標はプレイヤーの座標
-		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type],
-			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type],
-			0);
-
 		//プレイヤーからマウスへのベクトルのなす角
 		float angle = AngleOf2Vector(VGet(1.0f, 0.0f, 0.0f),
 			GetVector(VGet(player_pos.x, player_pos.y, 0),
@@ -146,7 +165,12 @@ bool Bullet::Spawn(VECTOR player_pos, int bullet_type)
 		if (player_pos.y > Input::GetMousePosY() + Screen::m_screen_pos.y)
 			angle = (float)(DX_PI * 2 - angle);
 		//出した角度から＋－３０°
-		angle += (float)(GetRand((int)(DX_PI * 100 / 3)) - (DX_PI * 100 / 6)) / 100;
+		angle += (float)(GetRand((int)(DX_PI * 100 / 3 * 2)) - (DX_PI * 100 / 3)) / 100;
+
+		//弾発射時の座標はプレイヤーの座標
+		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type] + cosf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 2),
+			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type] + sinf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 2),
+			0);
 
 		m_angle = angle;
 		m_move_angle = angle;
@@ -155,11 +179,6 @@ bool Bullet::Spawn(VECTOR player_pos, int bullet_type)
 	}
 	//斬撃
 	case Slashing: {
-		//弾発射時の座標はプレイヤーの座標
-		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type],
-			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type],
-			0);
-
 		//プレイヤーからマウスへのベクトルのなす角
 		float angle = AngleOf2Vector(VGet(1.0f, 0.0f, 0.0f),
 			GetVector(VGet(player_pos.x, player_pos.y, 0),
@@ -169,12 +188,25 @@ bool Bullet::Spawn(VECTOR player_pos, int bullet_type)
 		if (player_pos.y > Input::GetMousePosY() + Screen::m_screen_pos.y)
 			angle = (float)(DX_PI * 2 - angle);
 
+		//弾発射時の座標はプレイヤーの座標
+		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type] + cosf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 2),
+			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type] + sinf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 2),
+			0);
+
 		m_angle = angle;
 		m_move_angle = angle;
 		break;
 	}
 	//聖水
+	case Holywater: {
+		float angle = (float)GetRand((int)(DX_PI * 2 * 100)) / 100;
 
+		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type] + sinf(angle) * BULLET_DISPLAY_SIZE_Y[m_bullet_type],
+			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type] + cosf(angle) * BULLET_DISPLAY_SIZE_Y[m_bullet_type],
+			0);
+
+		m_display_count = 0;
+	}
 	//ニンニク
 	}
 
