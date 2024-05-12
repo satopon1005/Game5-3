@@ -93,7 +93,7 @@ void MapChip::StepEdit()
 			m_mapchip_handle_index[y_index][x_index] = Floor2;
 		}
 		if (Input::IsKeyDown(KEY_INPUT_5)) {
-			m_mapchip_handle_index[y_index][x_index] = Floor2;
+			m_mapchip_handle_index[y_index][x_index] = Stump;
 		}
 	}
 
@@ -129,7 +129,7 @@ void MapChip::DrawEdit()
 		}
 	}
 
-	DrawFormatString(0, 15, GetColor(255, 255, 255), "１：壁\n２：床");
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "１：壁\n２：ツタ\n３：床１\n４：床２\n５：切り株");
 }
 //プレイシーンでの描画処理
 void MapChip::Draw()

@@ -7,7 +7,7 @@ class ItemManager
 {
 private:
 	Item item_info[ITEM_MAX_NUM];
-	int m_handle[ItemTypeMaxNum];
+	int m_handle[BulletTypeMaxNum + ItemTypeMaxNum];
 
 public:
 	void Init();

@@ -40,11 +40,9 @@ void SceneEdit::Draw()
 	if (m_edit_mapchip_flag)
 		mapchip_info.DrawEdit();
 
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "エディット");
-
 	if (!m_edit_mapchip_flag) {
-		DrawFormatString(0, 15, GetColor(255, 255, 255), "セーブしますか？(0,セーブしない、1,セーブする)");
-		DrawFormatString(0, 30, GetColor(255, 255, 255), "%d" , m_save_mapchip_flag);
+		DrawFormatString(0, 0, GetColor(255, 255, 255), "セーブしますか？(0,セーブしない、1,セーブする)");
+		DrawFormatString(0, 15, GetColor(255, 255, 255), "%d" , m_save_mapchip_flag);
 	}
 }
 void SceneEdit::Fin()

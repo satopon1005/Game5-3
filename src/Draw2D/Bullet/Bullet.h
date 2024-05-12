@@ -8,6 +8,7 @@ enum BulletType
 	magicbullet,
 	Slashing,
 	Holywater,
+	Ninniku,
 
 	BulletTypeMaxNum
 };

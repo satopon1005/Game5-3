@@ -18,10 +18,6 @@ void EnemyManager::Step(VECTOR player_pos)
 		if (!enemy_info[i].GetIsUse())continue;
 
 		enemy_info[i].Step(player_pos);
-
-		if (CollisionObjectsCircle(player_pos, PLAYER_SIZE_R, enemy_info[i].GetPos(), ENEMY_COLLISION_SIZE_R)) {
-			enemy_info[i].SetIsUse(false);
-		}
 	}
 	m_spawn_interval_count++;
 }

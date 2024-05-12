@@ -8,7 +8,9 @@ void ItemManager::Init()
 	for (int i = 0; i < ITEM_MAX_NUM; i++){
 		item_info[i].Init();
 	}
-	LoadDivGraph(ITEM_HANDLE_PATH, ItemTypeMaxNum, 2, 1, 64, 64, m_handle);
+	LoadDivGraph(WEAPON_ITEM_HANDLE_PATH, BulletTypeMaxNum, 5, 1, 142, 151, m_handle);
+	for (int i = 0; i < ItemTypeMaxNum; i++)
+		m_handle[BulletTypeMaxNum + i] = LoadGraph(ITEM_HANDLE_PATH[i]);
 }
 void ItemManager::Step(VECTOR player_pos)
 {
@@ -24,7 +26,7 @@ void ItemManager::Draw()
 }
 void ItemManager::Fin()
 {
-	for (int i = 0; i < ItemTypeMaxNum; i++) {
+	for (int i = 0; i < BulletTypeMaxNum + ItemTypeMaxNum; i++) {
 		DeleteGraph(m_handle[i]);
 	}
 }

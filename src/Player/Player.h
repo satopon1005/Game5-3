@@ -1,10 +1,10 @@
 #pragma once
 #include "DxLib.h"
 
-const char PLAYER_PATH[] = { "data/Player/knight.png" };
-const int PLAYER_SIZE_R = 20;
+constexpr char PLAYER_PATH[] = { "data/Player/knight.png" };
+constexpr int PLAYER_SIZE_R = 20;
 
-const float Wait = 30.0f;
+constexpr float Wait = 30.0f;
 
 class Player
 {
@@ -17,7 +17,6 @@ public:
 
 	void Init();
 	void Step();
-	void Move(VECTOR playerPos, VECTOR bulletPos);
 
 	void Draw();
 	void Fin();

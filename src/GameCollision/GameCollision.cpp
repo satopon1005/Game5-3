@@ -1,12 +1,11 @@
 #include "DxLib.h"
 #include "GameCollision.h"
 #include "../Collision/Collision.h"
-#include "../Player/Player.h"
-#include "../Draw2D/Enemy/Enemy.h"
 
 bool ChackWallIndex(int wall_index) {
 	if (wall_index < MapChipType::WallMaxNum ||
-		wall_index == MapChipType::Tsuta)
+		wall_index == MapChipType::Tsuta ||
+		wall_index == MapChipType::Stump)
 		return true;
 	return false;
 }
@@ -172,6 +171,21 @@ bool CollisionObjectsCircle(VECTOR objects_1, int collision_size1, VECTOR object
 	return false;
 }
 
+void CollisionPlayerToEnemy(Player& player_info, EnemyManager& enemy_info)
+{
+	for (int enemy_index = 0; enemy_index < ENEMY_NUM; enemy_index++) {
+		if (!enemy_info.GetEnemyInfo(enemy_index).GetIsUse()) continue;
+
+		if (CollisionObjectsCircle(player_info.GetPos(),
+									PLAYER_SIZE_R,
+									enemy_info.GetEnemyInfo(enemy_index).GetPos(),
+									ENEMY_COLLISION_SIZE_R))
+		{
+
+		}
+	}
+}
+
 void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info, ItemManager& item_info)
 {
 	for (int enemy_index = 0; enemy_index < ENEMY_NUM; enemy_index++) {
@@ -189,7 +203,7 @@ void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info
 				bullet_info.GetBulletInfo(bullet_index).SetIsUse(false);
 
 				if (!enemy_info.GetEnemyInfo(enemy_index).GetIsUse())
-					item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), Keikenchi);
+					item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), BulletTypeMaxNum + Keikenchi);
 			}
 		}
 	}
@@ -203,7 +217,7 @@ int CollisionItemToPlayer(ItemManager& item_info, VECTOR player_pos)
 		if (CollisionObjectsCircle(player_pos,
 			PLAYER_SIZE_R,
 			item_info.GetItemInfo(item_index).GetPos(),
-			ITEM_SIZE_R[item_info.GetItemInfo(item_index).GetItemType()]))
+			ITEM_SIZE[item_info.GetItemInfo(item_index).GetItemType()]))
 		{
 			item_info.GetItemInfo(item_index).SetIsUse(false);
 			return item_info.GetItemInfo(item_index).GetItemType();

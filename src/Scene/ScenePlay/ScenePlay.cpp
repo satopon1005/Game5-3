@@ -35,6 +35,7 @@ void ScenePlay::Step()
 
 	item_info.Step(player_info.GetPos());
 
+	CollisionPlayerToEnemy(player_info, enemy_info);
 	CollisionEnemyToBullet(enemy_info, bullet_info, item_info);
 	if (int item_type = CollisionItemToPlayer(item_info, player_info.GetPos()) != -1) {
 		player_info.IsGetItem(item_type);
@@ -55,5 +56,4 @@ void ScenePlay::Fin()
 {
 	enemy_info.Fin();
 	bullet_info.Fin();
-	//normal.Fin();
 }
