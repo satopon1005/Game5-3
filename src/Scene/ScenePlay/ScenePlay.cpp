@@ -9,6 +9,11 @@ void ScenePlay::Init()
 {
 	mapchip_info.Init(MapChip::m_mapchip_index);
 	player_info.Init();
+	enemy_info.Init();
+	item_info.Init();
+
+	bullet_info.Init();
+
 	Screen::Init();
 }
 void ScenePlay::Step()
@@ -17,17 +22,38 @@ void ScenePlay::Step()
 		SceneBace::g_scene_ID = Title_Scene;
 	}
 	player_info.Step();
+
+	bullet_info.Step();
+	bullet_info.SpawnBullet(player_info.GetPos());
+
+	CollisionObjectsToWall(mapchip_info, player_info.GetPos());
+
 	Screen::Step(VGet(player_info.GetPosX(), player_info.GetPosY(), 0.0f));
 
-	CollisionPlayerToWall(mapchip_info, player_info.GetPos());
+	enemy_info.Step(player_info.GetPos());
+	enemy_info.Spawn();
+
+	item_info.Step(player_info.GetPos());
+
+	CollisionEnemyToBullet(enemy_info, bullet_info, item_info);
+	if (int item_type = CollisionItemToPlayer(item_info, player_info.GetPos()) != -1) {
+		player_info.IsGetItem(item_type);
+	}
 }
 void ScenePlay::Draw()
 {
 	mapchip_info.Draw();
+
+	bullet_info.Draw();
+
 	player_info.Draw();
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "ƒvƒŒƒC");
+	enemy_info.Draw();
+
+	item_info.Draw();
 }
 void ScenePlay::Fin()
 {
-
+	enemy_info.Fin();
+	bullet_info.Fin();
+	//normal.Fin();
 }

@@ -7,14 +7,19 @@ void Animation::Init()
 	m_current_anime_time = 0;
 }
 
-void Animation::PlayAnimation(const int max_index, const int change_anime_time)
+bool Animation::PlayAnimation(const int max_index, const int change_anime_time)
 {
+	bool flag = false;
+
 	if (m_current_anime_time >= change_anime_time) {
 		m_current_anime_index++;
+		m_current_anime_time = 0;
 		if (m_current_anime_index >= max_index) {
 			m_current_anime_index = 0;
+			flag = true;
 		}
 	}
 
 	m_current_anime_time++;
+	return flag;
 }

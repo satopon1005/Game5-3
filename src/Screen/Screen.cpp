@@ -17,10 +17,10 @@ void Screen::Step(VECTOR player_pos)
 
 	if (m_screen_pos.x < 0)
 		m_screen_pos.x = 0;
-	if (m_screen_pos.y < 0)
-		m_screen_pos.y = 0;
 	if (m_screen_pos.x > MAP_SIZE_X - SCREEN_SIZE_X)
 		m_screen_pos.x = MAP_SIZE_X - SCREEN_SIZE_X;
+	if (m_screen_pos.y < 0)
+		m_screen_pos.y = 0;
 	if (m_screen_pos.y > MAP_SIZE_Y - SCREEN_SIZE_Y)
 		m_screen_pos.y = MAP_SIZE_Y - SCREEN_SIZE_Y;
 }

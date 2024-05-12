@@ -1,9 +1,10 @@
 #pragma once
 #include "DxLib.h"
-#include "../Bullet/Bullet.h"
 
 const char PLAYER_PATH[] = { "data/Player/knight.png" };
-const int PLAYER_SIZE = 40;
+const int PLAYER_SIZE_R = 20;
+
+const float Wait = 30.0f;
 
 class Player
 {
@@ -11,10 +12,7 @@ private:
 	int handle;
 	int speed;
 
-	int MousePosX, MousePosY;
-
 	VECTOR PlayerPos;
-
 public:
 
 	void Init();
@@ -24,10 +22,10 @@ public:
 	void Draw();
 	void Fin();
 
+	void IsGetItem(int item_type);
+
 	float GetPosX(){return PlayerPos.x;}
 	float GetPosY(){return PlayerPos.y;}
-
-	bool IsShot();
 
 	VECTOR& GetPos() { return PlayerPos; }
 };

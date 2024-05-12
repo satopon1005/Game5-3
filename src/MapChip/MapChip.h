@@ -13,15 +13,42 @@ constexpr int MAPCHIP_NUM_Y = MAP_SIZE_Y / MAPCHIP_SIZE;
 constexpr char MAPCHIP_NUM_FILE_PATH[] = { "data/MapChipData/MapChip_Num.txt" };
 constexpr char MAPCHIP_NAME_FILE_PATH[] = { "data/MapChipData/MapChip_Name.txt" };
 
+constexpr char MAPCHIP_HANDLE_PATH[] = { "data/MapChip/map.png" };
+
 enum MapChipType
 {
+	Wall1,
+	Wall2,
+	Wall3,
+
+	WallMaxNum,
+
+	Floor1 = WallMaxNum,
+	Floor2,
+
+	Stump,
+	Tsuta,
+
+	FenceDown,
+	FenceUp,
+	FenceRight,
+	FenceLeft,
+
+	FenceRightDown,
+	FenceRightUp,
+	FenceLeftDown,
+	FenceLeftUp,
+
 	Wall,
-	Floor,
+
+	MapChipTypeMaxNum
 };
 
 class MapChip
 {
 private:
+	int m_handle[MapChipTypeMaxNum];
+
 	int m_mapchip_file_num;
 	int m_mapchip_handle_index[MAPCHIP_NUM_Y][MAPCHIP_NUM_X];
 	char** m_mapchip_file_name;
@@ -43,6 +70,8 @@ public:
 
 	void Draw();
 	void DrawEdit();
+
+	void LoadMapHandle();
 
 	void LoadMapNum();
 	void LoadFileName();
