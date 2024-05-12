@@ -189,8 +189,8 @@ bool Bullet::Spawn(VECTOR player_pos, int bullet_type)
 			angle = (float)(DX_PI * 2 - angle);
 
 		//弾発射時の座標はプレイヤーの座標
-		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type] + cosf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 2),
-			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type] + sinf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 2),
+		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type] + cosf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 4),
+			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type] + sinf(angle) * (BULLET_DISPLAY_SIZE_Y[m_bullet_type] / 4),
 			0);
 
 		m_angle = angle;

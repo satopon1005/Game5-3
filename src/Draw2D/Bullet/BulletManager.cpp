@@ -13,8 +13,10 @@ void BulletManager::Init()
 			m_handle[bullet_type_index]);
 
 		m_spawn_interval_count[bullet_type_index] = 0;
-		m_bullet_usable_flag[bullet_type_index] = true;
+		m_bullet_usable_flag[bullet_type_index] = false;
 	}
+	m_bullet_usable_flag[Slashing] = true;
+	m_bullet_usable_flag[Ninniku] = true;
 }
 void BulletManager::Step()
 {

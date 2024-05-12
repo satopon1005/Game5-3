@@ -202,14 +202,20 @@ void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info
 				enemy_info.GetEnemyInfo(enemy_index).IsDamage(BULLET_DAMAGE_NUM[bullet_info.GetBulletInfo(bullet_index).GetBulletType()]);
 				bullet_info.GetBulletInfo(bullet_index).SetIsUse(false);
 
-				if (!enemy_info.GetEnemyInfo(enemy_index).GetIsUse())
-					item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), BulletTypeMaxNum + Keikenchi);
+				if (!enemy_info.GetEnemyInfo(enemy_index).GetIsUse()) {
+					int spawn_item_index = GetRand(BulletTypeMaxNum * 3);
+
+					if (spawn_item_index > BulletTypeMaxNum)
+						spawn_item_index = BulletTypeMaxNum;
+
+					item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), spawn_item_index);
+				}
 			}
 		}
 	}
 }
 
-int CollisionItemToPlayer(ItemManager& item_info, VECTOR player_pos)
+int CollisionItemToPlayer(ItemManager& item_info, BulletManager& bullet_info, VECTOR player_pos)
 {
 	for (int item_index = 0; item_index < ITEM_MAX_NUM; item_index++) {
 		if (!item_info.GetItemInfo(item_index).GetIsUse()) continue;
@@ -220,7 +226,12 @@ int CollisionItemToPlayer(ItemManager& item_info, VECTOR player_pos)
 			ITEM_SIZE[item_info.GetItemInfo(item_index).GetItemType()]))
 		{
 			item_info.GetItemInfo(item_index).SetIsUse(false);
-			return item_info.GetItemInfo(item_index).GetItemType();
+
+			int index = item_info.GetItemInfo(item_index).GetItemType();
+
+			bullet_info.SetUsableFlag(index, true);
+
+			return index;
 		}
 	}
 	return -1;

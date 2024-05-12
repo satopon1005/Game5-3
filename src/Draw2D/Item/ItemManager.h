@@ -9,6 +9,8 @@ private:
 	Item item_info[ITEM_MAX_NUM];
 	int m_handle[BulletTypeMaxNum + ItemTypeMaxNum];
 
+	bool m_spaen_flag[BulletTypeMaxNum];
+
 public:
 	void Init();
 	void Step(VECTOR player_pos);

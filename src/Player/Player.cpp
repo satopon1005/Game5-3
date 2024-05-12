@@ -3,6 +3,7 @@
 #include "../Input/Input.h"
 #include "../Screen/Screen.h"
 #include "../Draw2D/Item/Item.h"
+#include "../Draw2D/Bullet/Bullet.h"
 
 
 void Player::Init()
@@ -74,10 +75,10 @@ void Player::Fin()
 void Player::IsGetItem(int item_type)
 {
 	switch (item_type) {
-	case ItemType::Potion: {
+	case ItemType::Potion + BulletTypeMaxNum: {
 		break;
 	}
-	case ItemType::Keikenchi: {
+	case ItemType::Keikenchi + BulletTypeMaxNum: {
 		m_keikenchi++;
 		if (m_keikenchi >= DEFAULT_LEVELUP_NECESSARY_KEIKENCHI + (m_level * 5)) {
 			m_level++;

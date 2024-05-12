@@ -13,4 +13,4 @@ void CollisionPlayerToEnemy(Player& player_info, EnemyManager& enemy_info);
 
 void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info, ItemManager& item_info);
 
-int CollisionItemToPlayer(ItemManager& item_info, VECTOR player_pos);
+int CollisionItemToPlayer(ItemManager& item_info, BulletManager& bullet_info, VECTOR player_pos);
