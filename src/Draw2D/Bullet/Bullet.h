@@ -18,33 +18,42 @@ constexpr char BULLET_TYPE_HANDLE_PATH[BulletTypeMaxNum][64] = {
 };
 
 //サイズ関連
-constexpr int BULLET_GAZOU_SIZE[BulletTypeMaxNum] = {
-	300,128,200
+constexpr int BULLET_GAZOU_SIZE_X[BulletTypeMaxNum] = {
+	100,128,70
 };
 
-constexpr int BULLET_DISPLAY_SIZE[BulletTypeMaxNum] = {
-	20,32,20
+constexpr int BULLET_GAZOU_SIZE_Y[BulletTypeMaxNum] = {
+	100,69,100
+};
+
+constexpr int BULLET_DISPLAY_SIZE_Y[BulletTypeMaxNum] = {
+	20,20,20
 };
 
 constexpr int BULLET_COLLISION_SIZE_R[BulletTypeMaxNum] = {
-	BULLET_DISPLAY_SIZE[fireball] / 2,
-	BULLET_DISPLAY_SIZE[magicbullet] / 2,
-	BULLET_DISPLAY_SIZE[Slashing] / 2,
+	BULLET_DISPLAY_SIZE_Y[fireball] / 2,
+	BULLET_DISPLAY_SIZE_Y[magicbullet] / 2,
+	BULLET_DISPLAY_SIZE_Y[Slashing] / 2,
 };
 
 //アニメーション関連
 constexpr int BULLET_ANIME_NUM[BulletTypeMaxNum] = {
-	1,1,1
+	3,3,3
 };
 constexpr int BULLET_ANIME_MAX_NUM = 1;
 
-constexpr float BULLET_ANIME_TYPE[BulletTypeMaxNum] = {
-	20,0,0
+constexpr int BULLET_ANIME_TIME[BulletTypeMaxNum] = {
+	20,20,20
 };
 
 //弾のスピード
 constexpr int BULLET_MOVE_SPEED[BulletTypeMaxNum] = {
 	10,10,10
+};
+
+//連続で発射する弾の数
+constexpr int BULLET_CONTINUATION_SHOT_NUM[BulletTypeMaxNum] = {
+	3,3,1
 };
 
 class Bullet :public Draw2D

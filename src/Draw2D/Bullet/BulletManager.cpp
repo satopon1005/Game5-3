@@ -8,18 +8,24 @@ void BulletManager::Init()
 			BULLET_ANIME_NUM[bullet_type_index],
 			1,
 			BULLET_ANIME_NUM[bullet_type_index],
-			BULLET_GAZOU_SIZE[bullet_type_index],
-			BULLET_GAZOU_SIZE[bullet_type_index],
+			BULLET_GAZOU_SIZE_X[bullet_type_index],
+			BULLET_GAZOU_SIZE_Y[bullet_type_index],
 			m_handle[bullet_type_index]);
+
+		m_spawn_interval_count[bullet_type_index] = 0;
+		m_bullet_usable_flag[bullet_type_index] = true;
 	}
-	m_spawn_interval_count = 0;
 }
 void BulletManager::Step()
 {
 	for (int bullet_index = 0; bullet_index < BULLET_MAX_NUM; bullet_index++) {
 		bullet_info[bullet_index].Step();
 	}
-	m_spawn_interval_count++;
+
+	for (int bullet_type_index = 0; bullet_type_index < BulletTypeMaxNum; bullet_type_index++) {
+		if (m_bullet_usable_flag[bullet_type_index])
+			m_spawn_interval_count[bullet_type_index]++;
+	}
 }
 void BulletManager::Draw()
 {
@@ -36,15 +42,28 @@ void BulletManager::Fin()
 	}
 }
 
-void BulletManager::Spawn(VECTOR player_pos)
+void BulletManager::SpawnBullet(VECTOR player_pos)
 {
-	if (m_spawn_interval_count < BULLET_SPAWN_INTERVAL_COUNT)
-		return;
+	for (int bullet_type_index = 0; bullet_type_index < BulletTypeMaxNum; bullet_type_index++)
+	{
+		for (int continuation_num = 0;
+			continuation_num < BULLET_CONTINUATION_SHOT_NUM[bullet_type_index];
+			continuation_num++)
+			Spawn(player_pos, bullet_type_index);
+	}
+}
+
+bool BulletManager::Spawn(VECTOR player_pos, int bullet_type)
+{
+	if (m_spawn_interval_count[bullet_type] < BULLET_SPAWN_INTERVAL_COUNT)
+		return false;
 
 	for (int bullet_index = 0; bullet_index < BULLET_MAX_NUM; bullet_index++) {
-		if (bullet_info[bullet_index].Spawn(player_pos, Slashing)) {
-			m_spawn_interval_count = 0;
-			break;
+		if (bullet_info[bullet_index].Spawn(player_pos, bullet_type)) {
+			m_spawn_interval_count[bullet_type] = 0;
+			return true;
 		}
 	}
+
+	return false;
 }

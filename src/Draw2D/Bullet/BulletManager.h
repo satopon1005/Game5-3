@@ -11,7 +11,9 @@ private:
 
 	int m_handle[BulletTypeMaxNum][BULLET_ANIME_MAX_NUM];
 
-	int m_spawn_interval_count;
+	bool m_bullet_usable_flag[BulletTypeMaxNum];
+
+	int m_spawn_interval_count[BulletTypeMaxNum];
 
 public:
 	void Init();
@@ -19,7 +21,10 @@ public:
 	void Draw();
 	void Fin();
 
-	void Spawn(VECTOR player_pos);
+	bool Spawn(VECTOR player_pos, int bullet_type);
+	void SpawnBullet(VECTOR player_pos);
+
+	bool SetUsableFlag(int index, bool flag) { return m_bullet_usable_flag[index] = flag; }
 
 	Bullet& GetBulletInfo(int index) { return bullet_info[index]; }
 };

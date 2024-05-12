@@ -24,7 +24,7 @@ void ScenePlay::Step()
 	player_info.Step();
 
 	bullet_info.Step();
-	bullet_info.Spawn(player_info.GetPos());
+	bullet_info.SpawnBullet(player_info.GetPos());
 
 	CollisionObjectsToWall(mapchip_info, player_info.GetPos());
 

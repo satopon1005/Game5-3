@@ -14,34 +14,42 @@ void Bullet::Init()
 
 	m_angle = 0.0f;
 	m_move_angle = 0.0f;
+
+	m_anime_index.Init();
 }
 void Bullet::Step()
 {
 	if (m_isUse) {
 		switch (m_bullet_type) {
+		//炎の杖
 		case fireball: {
 			m_pos.x += cosf(m_angle) * BULLET_MOVE_SPEED[m_bullet_type];
 			m_pos.y += sinf(m_angle) * BULLET_MOVE_SPEED[m_bullet_type];
 			break;
 		}
+		//魔弾
 		case magicbullet: {
 			m_pos.x += cosf(m_angle) * BULLET_MOVE_SPEED[m_bullet_type];
 			m_pos.y += sinf(m_angle) * BULLET_MOVE_SPEED[m_bullet_type];
 			break;
 		}
+		//斬撃
 		case Slashing: {
 			m_pos.x += cosf(m_angle) * BULLET_MOVE_SPEED[m_bullet_type];
 			m_pos.y += sinf(m_angle) * BULLET_MOVE_SPEED[m_bullet_type];
-
-			m_move_angle += 0.3f;
 			break;
 		}
+		//聖水
+
+		//ニンニク
 		}
 
-		if (m_pos.x - BULLET_DISPLAY_SIZE[m_bullet_type] - Screen::m_screen_pos.x < 0 ||
-			m_pos.y - BULLET_DISPLAY_SIZE[m_bullet_type] - Screen::m_screen_pos.y  < 0 ||
-			m_pos.x + BULLET_DISPLAY_SIZE[m_bullet_type] - Screen::m_screen_pos.x  > SCREEN_SIZE_X ||
-			m_pos.y + BULLET_DISPLAY_SIZE[m_bullet_type] - Screen::m_screen_pos.y  > SCREEN_SIZE_Y) {
+		m_anime_index.PlayAnimation(BULLET_ANIME_NUM[m_bullet_type], BULLET_ANIME_TIME[m_bullet_type]);
+
+		if (m_pos.x - BULLET_DISPLAY_SIZE_Y[m_bullet_type] - Screen::m_screen_pos.x < 0 ||
+			m_pos.y - BULLET_DISPLAY_SIZE_Y[m_bullet_type] - Screen::m_screen_pos.y  < 0 ||
+			m_pos.x + BULLET_DISPLAY_SIZE_Y[m_bullet_type] - Screen::m_screen_pos.x  > SCREEN_SIZE_X ||
+			m_pos.y + BULLET_DISPLAY_SIZE_Y[m_bullet_type] - Screen::m_screen_pos.y  > SCREEN_SIZE_Y) {
 			m_isUse = false;
 		}
 	}
@@ -50,12 +58,37 @@ void Bullet::Draw(int handle)
 {
 	if (m_isUse) {
 		switch (m_bullet_type) {
+		//炎の杖
 		case fireball: {
+			DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
+				BULLET_COLLISION_SIZE_R[m_bullet_type],
+				GetColor(255, 255, 0), true);
+
+			DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
+				((double)BULLET_DISPLAY_SIZE_Y[m_bullet_type] / (double)BULLET_GAZOU_SIZE_Y[m_bullet_type]),
+				(double)m_move_angle,
+				handle,
+				true);
 			break;
 		}
+		//魔弾
 		case magicbullet: {
+			DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
+				BULLET_COLLISION_SIZE_R[m_bullet_type],
+				GetColor(255, 0, 255), true);
+
+			DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
+				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
+				((double)BULLET_DISPLAY_SIZE_Y[m_bullet_type] / (double)BULLET_GAZOU_SIZE_Y[m_bullet_type]),
+				(double)m_move_angle,
+				handle,
+				true);
 			break;
 		}
+		//斬撃
 		case Slashing: {
 			DrawCircle((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
@@ -64,12 +97,15 @@ void Bullet::Draw(int handle)
 
 			DrawRotaGraph((int)(m_pos.x + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.x),
 				(int)(m_pos.y + BULLET_COLLISION_SIZE_R[m_bullet_type] - Screen::m_screen_pos.y),
-				((double)BULLET_DISPLAY_SIZE[m_bullet_type] / (double)BULLET_GAZOU_SIZE[m_bullet_type]),
+				((double)BULLET_DISPLAY_SIZE_Y[m_bullet_type] / (double)BULLET_GAZOU_SIZE_Y[m_bullet_type]),
 				(double)m_move_angle,
 				handle,
 				true);
 			break;
 		}
+		//聖水
+
+		//ニンニク
 		}
 	}
 }
@@ -80,22 +116,70 @@ bool Bullet::Spawn(VECTOR player_pos, int bullet_type)
 
 	m_bullet_type = bullet_type;
 
-	m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type],
-		player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type],
-		0);
+	switch (m_bullet_type) {
+	//炎の杖
+	case fireball: {
+		//弾発射時の座標はプレイヤーの座標
+		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type],
+			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type],
+			0);
+
+		float angle = (float)GetRand((int)(DX_PI * 2 * 100)) / 100;
+
+		m_angle = angle;
+		m_move_angle = angle;
+		break;
+	}
+	//魔弾
+	case magicbullet: {
+		//弾発射時の座標はプレイヤーの座標
+		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type],
+			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type],
+			0);
+
+		//プレイヤーからマウスへのベクトルのなす角
+		float angle = AngleOf2Vector(VGet(1.0f, 0.0f, 0.0f),
+			GetVector(VGet(player_pos.x, player_pos.y, 0),
+				VGet((float)Input::GetMousePosX() + Screen::m_screen_pos.x,
+					(float)Input::GetMousePosY() + Screen::m_screen_pos.y,
+					0.0f)));
+		if (player_pos.y > Input::GetMousePosY() + Screen::m_screen_pos.y)
+			angle = (float)(DX_PI * 2 - angle);
+		//出した角度から＋－３０°
+		angle += (float)(GetRand((int)(DX_PI * 100 / 3)) - (DX_PI * 100 / 6)) / 100;
+
+		m_angle = angle;
+		m_move_angle = angle;
+
+		break;
+	}
+	//斬撃
+	case Slashing: {
+		//弾発射時の座標はプレイヤーの座標
+		m_pos = VGet(player_pos.x - BULLET_COLLISION_SIZE_R[m_bullet_type],
+			player_pos.y - BULLET_COLLISION_SIZE_R[m_bullet_type],
+			0);
+
+		//プレイヤーからマウスへのベクトルのなす角
+		float angle = AngleOf2Vector(VGet(1.0f, 0.0f, 0.0f),
+			GetVector(VGet(player_pos.x, player_pos.y, 0),
+				VGet((float)Input::GetMousePosX() + Screen::m_screen_pos.x,
+					(float)Input::GetMousePosY() + Screen::m_screen_pos.y,
+					0.0f)));
+		if (player_pos.y > Input::GetMousePosY() + Screen::m_screen_pos.y)
+			angle = (float)(DX_PI * 2 - angle);
+
+		m_angle = angle;
+		m_move_angle = angle;
+		break;
+	}
+	//聖水
+
+	//ニンニク
+	}
+
 	m_isUse = true;
-
-	float angle = AngleOf2Vector(VGet(1.0f, 0.0f, 0.0f),
-		GetVector(VGet(player_pos.x, player_pos.y, 0),
-			VGet((float)Input::GetMousePosX() + Screen::m_screen_pos.x,
-				(float)Input::GetMousePosY() + Screen::m_screen_pos.y,
-				0.0f)));
-
-	if (player_pos.y > Input::GetMousePosY() + Screen::m_screen_pos.y)
-		angle = (float)(DX_PI * 2 - angle);
-
-	m_angle = angle;
-	m_move_angle = angle;
+	m_anime_index.Init();
 
 	return true;
 }
