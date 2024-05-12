@@ -13,7 +13,7 @@ enum BulletType
 
 constexpr char BULLET_TYPE_HANDLE_PATH[BulletTypeMaxNum][64] = {
 	{"data/Weapon/fireball.png"},
-	{"data/Weapon/magicbullet,png"},
+	{"data/Weapon/magicbullet.png"},
 	{"data/Weapon/Slashing.png"},
 };
 
@@ -27,20 +27,18 @@ constexpr int BULLET_GAZOU_SIZE_Y[BulletTypeMaxNum] = {
 };
 
 constexpr int BULLET_DISPLAY_SIZE_Y[BulletTypeMaxNum] = {
-	20,20,20
+	50,50,50
 };
 
 constexpr int BULLET_COLLISION_SIZE_R[BulletTypeMaxNum] = {
-	BULLET_DISPLAY_SIZE_Y[fireball] / 2,
-	BULLET_DISPLAY_SIZE_Y[magicbullet] / 2,
-	BULLET_DISPLAY_SIZE_Y[Slashing] / 2,
+	10,10,10,
 };
 
 //アニメーション関連
 constexpr int BULLET_ANIME_NUM[BulletTypeMaxNum] = {
 	3,3,3
 };
-constexpr int BULLET_ANIME_MAX_NUM = 1;
+constexpr int BULLET_ANIME_MAX_NUM = 3;
 
 constexpr int BULLET_ANIME_TIME[BulletTypeMaxNum] = {
 	20,20,20

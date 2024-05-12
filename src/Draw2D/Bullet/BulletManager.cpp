@@ -6,14 +6,17 @@ void BulletManager::Init()
 	for (int bullet_type_index = 0; bullet_type_index < BulletTypeMaxNum; bullet_type_index++) {
 		LoadDivGraph(BULLET_TYPE_HANDLE_PATH[bullet_type_index],
 			BULLET_ANIME_NUM[bullet_type_index],
-			1,
 			BULLET_ANIME_NUM[bullet_type_index],
+			1,
 			BULLET_GAZOU_SIZE_X[bullet_type_index],
 			BULLET_GAZOU_SIZE_Y[bullet_type_index],
 			m_handle[bullet_type_index]);
 
 		m_spawn_interval_count[bullet_type_index] = 0;
 		m_bullet_usable_flag[bullet_type_index] = true;
+	}
+	for (int bullet_type_index = 0; bullet_type_index < BulletTypeMaxNum; bullet_type_index++) {
+		
 	}
 }
 void BulletManager::Step()
