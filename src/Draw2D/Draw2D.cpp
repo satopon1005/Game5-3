@@ -7,6 +7,9 @@ Draw2D::Draw2D()
 	m_hp = 0;
 	m_pos = { 0 };
 	m_isUse = 0;
+
+	m_damage_effect_count = 0;
+	m_damage_effect_alpha = 0;
 }
 Draw2D::~Draw2D()
 {

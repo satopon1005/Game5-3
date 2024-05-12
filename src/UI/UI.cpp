@@ -32,7 +32,7 @@ void UI_Info::Draw(int player_hp, int player_keikenchi, int player_level)
 
 	DrawBox((int)(m_pos[1].x),
 		(int)(m_pos[1].y),
-		(int)(((float)player_keikenchi / (float)(DEFAULT_LEVELUP_NECESSARY_KEIKENCHI + player_level)) * DRAW_UI_X + m_pos[1].x),
+		(int)(((float)player_keikenchi / (float)(DEFAULT_LEVELUP_NECESSARY_KEIKENCHI + (player_level * 5))) * DRAW_UI_X + m_pos[1].x),
 		(int)(DRAW_UI_Y[1] + m_pos[1].y),
 		GetColor(0, 120, 255), true);
 }

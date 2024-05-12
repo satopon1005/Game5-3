@@ -22,6 +22,9 @@ private:
 
 	int m_level;
 	int m_keikenchi;
+
+	int m_damage_effect_count;
+	int m_damage_effect_alpha;
 public:
 
 	void Init();
@@ -40,4 +43,8 @@ public:
 	int GetHP() { return m_hp; }
 	int GetLevel() { return m_level; }
 	int GetKeikenchi() { return m_keikenchi; }
+
+	int GetAlpha() { return m_damage_effect_alpha; }
+
+	void IsDamage(int damage);
 };

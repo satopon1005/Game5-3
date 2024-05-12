@@ -19,11 +19,11 @@ constexpr int ENEMY_COLLISION_SIZE_R = 20;
 constexpr float ENEMY_SPEED = 2.0f;
 
 constexpr int ENEMY_DEFAULT_HP[EnemyTypeMaxNum] = {
-	500,
-	500,
-	700,
-	1000,
-	400,
+	500,500,700,1000,400,
+};
+
+constexpr int ENEMY_ATTACK_POWER[EnemyTypeMaxNum] = {
+	20,20,50,100,40
 };
 
 class Enemy_Info :public Draw2D

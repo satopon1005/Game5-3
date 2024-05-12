@@ -16,6 +16,9 @@ void Player::Init()
 	m_keikenchi = 0;
 
 	m_hp = PLAYER_DEFAULT_HP;
+
+	m_damage_effect_count = 0;
+	m_damage_effect_alpha = 0;
 }
 
 void Player::Step()
@@ -35,6 +38,15 @@ void Player::Step()
 	if (Input::IsKeyKeep(KEY_INPUT_S))
 	{
 		PlayerPos.y += speed;
+	}
+
+	if (m_damage_effect_alpha != 255) {
+		m_damage_effect_count++;
+
+		if (m_damage_effect_count >= DAMAGE_EFFECT_TIME) {
+			m_damage_effect_alpha = 255;
+			m_damage_effect_count = 0;
+		}
 	}
 }
 
@@ -73,5 +85,18 @@ void Player::IsGetItem(int item_type)
 		}
 		break;
 	}
+	}
+}
+
+void Player::IsDamage(int damage)
+{
+	if (m_damage_effect_alpha != 255)
+		return;
+
+	m_hp -= damage;
+	m_damage_effect_alpha = 120;
+
+	if (m_hp <= 0) {
+		m_hp = 0;
 	}
 }
