@@ -15,6 +15,8 @@ enum SceneID
 	Select_Scene,
 	Edit_Scene,
 	Play_Scene,
+	Clear_Scene,
+	GameOver_Scene,
 
 	Loop_Scene
 };

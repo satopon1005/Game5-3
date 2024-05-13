@@ -7,6 +7,8 @@
 #include "ScenePlay/ScenePlay.h"
 #include "SceneEdit/SceneEdit.h"
 #include "SceneSelect/SceneSelect.h"
+#include "SceneClear/SceneClear.h"
+#include "SceneGameOver/SceneGameOver.h"
 
 int SceneBace::g_scene_ID;
 
@@ -55,6 +57,26 @@ void SceneManager::Main()
 			delete scene;
 		}
 		scene = new ScenePlay;
+		scene->Init();
+		SceneBace::g_scene_ID = Loop_Scene;
+		break;
+	}
+	case Clear_Scene: {
+		if (scene != nullptr) {
+			scene->Fin();
+			delete scene;
+		}
+		scene = new SceneClear;
+		scene->Init();
+		SceneBace::g_scene_ID = Loop_Scene;
+		break;
+	}
+	case GameOver_Scene: {
+		if (scene != nullptr) {
+			scene->Fin();
+			delete scene;
+		}
+		scene = new SceneGameOver;
 		scene->Init();
 		SceneBace::g_scene_ID = Loop_Scene;
 		break;
