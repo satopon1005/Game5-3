@@ -129,7 +129,7 @@ void MapChip::DrawEdit()
 		}
 	}
 
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "１：壁\n２：ツタ\n３：床１\n４：床２\n５：切り株");
+	DrawFormatString(0, 0, GetColor(0, 0, 0), "１：壁\n２：ツタ\n３：床１\n４：床２\n５：切り株");
 }
 //プレイシーンでの描画処理
 void MapChip::Draw()
