@@ -6,6 +6,9 @@
 #include "../../Draw2D/Item/ItemManager.h"
 #include "../../Draw2D/Bullet/BulletManager.h"
 #include "../../UI/UI.h"
+#include "../../CountTime/CountTime.h"
+
+constexpr int PLAY_TIME[2]{ 2,30 };
 
 class ScenePlay :public SceneBace
 {
@@ -14,6 +17,8 @@ private:
 	Player player_info;
 	EnemyManager enemy_info;
 	ItemManager item_info;
+
+	CountTime count_time_info;
 
 	UI_Info ui_info;
 

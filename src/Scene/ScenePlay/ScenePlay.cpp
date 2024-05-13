@@ -14,13 +14,16 @@ void ScenePlay::Init()
 
 	bullet_info.Init();
 
+	count_time_info.Init();
+	count_time_info.StartCountTime(PLAY_TIME[0], PLAY_TIME[1]);
+
 	ui_info.Init();
 
 	Screen::Init();
 }
 void ScenePlay::Step()
 {
-	if (Input::IsKeyPush(KEY_INPUT_RETURN)) {
+	if (count_time_info.Step()) {
 		SceneBace::g_scene_ID = Title_Scene;
 	}
 	player_info.Step();
@@ -56,7 +59,7 @@ void ScenePlay::Draw()
 
 	item_info.Draw();
 
-
+	count_time_info.Draw(VGet(SCREEN_SIZE_X / 2, 10, 0));
 	ui_info.Draw(player_info.GetHP(), player_info.GetKeikenchi(), player_info.GetLevel());
 }
 void ScenePlay::Fin()

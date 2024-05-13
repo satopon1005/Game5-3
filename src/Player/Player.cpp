@@ -8,7 +8,7 @@
 
 void Player::Init()
 {
-	PlayerPos= { 320.0f,240.0f/*,0.0f */};
+	PlayerPos= PLAYER_DEFAULT_POS;
 	speed = 5;
 
 	handle = LoadGraph(PLAYER_PATH);

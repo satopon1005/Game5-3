@@ -1,5 +1,8 @@
 #pragma once
 #include "DxLib.h"
+#include "../Common.h"
+
+constexpr VECTOR PLAYER_DEFAULT_POS = { SCREEN_SIZE_X / 2,SCREEN_SIZE_Y / 2,0 };
 
 constexpr char PLAYER_PATH[] = { "data/Player/knight.png" };
 constexpr int PLAYER_SIZE_R = 20;
