@@ -5,10 +5,39 @@
 
 void SceneTitle::Init()
 {
+	ImageHandle[0] = LoadGraph("data/Title/title.png");
+	ImageHandle[1] = LoadGraph("data/Title/leftarrow.png");
+	ImageHandle[2] = LoadGraph("data/Title/rightarrow.png");
 
+	PosX[0] = 410.0f;
+	PosX[1] = 900.0f;
+	for (int i = 0; i < 2; i++)
+	{
+		PosY[i] = 525.0f;		//矢印のY座標
+	}
+	m_isTurn = false;		//反転フラグ
 }
 void SceneTitle::Step()
 {
+	if (m_isTurn)
+	{
+		PosX[0]++;
+		PosX[1]--;
+		if (PosX[0] >= 410.0f)
+		{
+			m_isTurn = false;
+		}
+	}
+	else
+	{
+		PosX[0]--;
+		PosX[1]++;
+		if (PosX[0] <= 350.0f)
+		{
+			m_isTurn = true;
+		}
+	}
+
 	if (Input::IsKeyPush(KEY_INPUT_RETURN)) {
 		SceneBace::g_scene_ID = Edit_Scene;
 	}
@@ -18,9 +47,16 @@ void SceneTitle::Step()
 }
 void SceneTitle::Draw()
 {
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "タイトル");
+	DrawGraph(0, 0, ImageHandle[0], true);
+
+	DrawRotaGraph((int)PosX[0], (int)PosY[0], 1.0f, 0.0f, ImageHandle[1], true);
+
+	DrawRotaGraph((int)PosX[1], (int)PosY[1], 1.0f, 0.0f, ImageHandle[1], true,true);
 }
 void SceneTitle::Fin()
 {
-
+	for (int i = 0; i < 3; i++)
+	{
+		DeleteGraph(ImageHandle[i]);
+	}
 }

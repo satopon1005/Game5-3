@@ -24,7 +24,7 @@ void ScenePlay::Init()
 void ScenePlay::Step()
 {
 	if (count_time_info.Step()) {
-		SceneBace::g_scene_ID = Title_Scene;
+		SceneBace::g_scene_ID = Clear_Scene;
 	}
 	player_info.Step();
 
@@ -46,6 +46,10 @@ void ScenePlay::Step()
 	int item_type = CollisionItemToPlayer(item_info, bullet_info, player_info.GetPos());
 	if (item_type != -1) {
 		player_info.IsGetItem(item_type);
+	}
+
+	if (player_info.GetHP() <= 0) {
+		SceneBace::g_scene_ID = GameOver_Scene;
 	}
 }
 void ScenePlay::Draw()
