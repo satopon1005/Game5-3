@@ -36,10 +36,10 @@ void Enemy_Info::Step(VECTOR player_pos)
 void Enemy_Info::Draw(int handle)
 {
 	if (m_isUse) {
-		DrawCircle((int)(m_pos.x - Screen::m_screen_pos.x),
+		/*DrawCircle((int)(m_pos.x - Screen::m_screen_pos.x),
 			(int)(m_pos.y - Screen::m_screen_pos.y),
 			ENEMY_COLLISION_SIZE_R,
-			GetColor(0, 255, 0), true);
+			GetColor(0, 255, 0), true);*/
 
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_damage_effect_alpha);
 		DrawExtendGraph((int)(m_pos.x - Screen::m_screen_pos.x - ENEMY_COLLISION_SIZE_R),
