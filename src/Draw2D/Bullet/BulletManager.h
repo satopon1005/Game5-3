@@ -1,7 +1,7 @@
 #pragma once
 #include "Bullet.h"
 
-constexpr int BULLET_MAX_NUM = 100;
+constexpr int BULLET_MAX_NUM = 300;
 constexpr int BULLET_SPAWN_INTERVAL_COUNT[BulletTypeMaxNum] = { 20,20,20,90 };
 
 class BulletManager

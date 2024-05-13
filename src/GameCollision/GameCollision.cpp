@@ -194,6 +194,7 @@ void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info
 
 		for (int bullet_index = 0; bullet_index < BULLET_MAX_NUM; bullet_index++) {
 			if (!bullet_info.GetBulletInfo(bullet_index).GetIsUse()) continue;
+			if (bullet_info.GetBulletInfo(bullet_index).GetBulletType() == BulletType::Holywater) continue;
 
 			if(CollisionObjectsCircle(enemy_info.GetEnemyInfo(enemy_index).GetPos(),
 									ENEMY_COLLISION_SIZE_R,

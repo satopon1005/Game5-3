@@ -39,7 +39,7 @@ void EnemyManager::Fin()
 
 void EnemyManager::Spawn(int elapsed_second)
 {
-	if (m_spawn_interval_count >= ENEMY_SPAWN_INTERVAL_COUNT - (int)(elapsed_second / 10)) {
+	if (m_spawn_interval_count >= ENEMY_SPAWN_INTERVAL_COUNT - (int)(elapsed_second / 5)) {
 		m_spawn_interval_count = 0;
 		for (int i = 0; i < ENEMY_NUM; i++) {
 			if (enemy_info[i].Spawn())

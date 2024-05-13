@@ -5,7 +5,9 @@
 
 void SceneSelect::Init()
 {
-	m_bg_handle = LoadGraph(SELECT_BG_HANDLE_PATH);
+	m_bg_handle[0] = LoadGraph(SELECT_BG_HANDLE_PATH);
+	m_bg_handle[1] = LoadGraph(SELECT_BG_HANDLE_PATH2);
+	m_select_handle = LoadGraph(SELECT_HANDLE_PATH);
 
 	mapchip_info.Init();
 	m_select_num = 0;
@@ -72,7 +74,7 @@ void SceneSelect::Step()
 }
 void SceneSelect::Draw()
 {
-	DrawGraph(0, 0, m_bg_handle, true);
+	DrawGraph(0, 0, m_bg_handle[0], true);
 
 	int mapindex[5];
 
@@ -98,6 +100,12 @@ void SceneSelect::Draw()
 			(int)(m_select_pos[i].y + m_select_size[i] / 2),
 			GetColor(255, 0, 0), true);
 
+		DrawExtendGraph((int)(m_select_pos[i].x - m_select_size[i] / 2),
+			(int)(m_select_pos[i].y - m_select_size[i] / 2),
+			(int)(m_select_pos[i].x + m_select_size[i] / 2),
+			(int)(m_select_pos[i].y + m_select_size[i] / 2),
+			m_select_handle, true);
+
 		string begin_str = "data/MapChipData/";
 		string end_str = ".csv";
 		int begin_str_len = (int)begin_str.length();
@@ -119,6 +127,8 @@ void SceneSelect::Draw()
 			Font::GetFontHandle(HGP‘n‰pŠpÎß¯Ìß‘Ì),
 			c_str);
 	}
+
+	DrawGraph(0, 0, m_bg_handle[1], true);
 }
 void SceneSelect::Fin()
 {

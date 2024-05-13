@@ -2,7 +2,7 @@
 #include "Enemy.h"
 #include "../../Draw2D/Item/ItemManager.h"
 
-constexpr int ENEMY_NUM = 100;
+constexpr int ENEMY_NUM = 300;
 constexpr int ENEMY_SPAWN_INTERVAL_COUNT = 30;
 
 class EnemyManager

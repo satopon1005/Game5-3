@@ -57,7 +57,7 @@ void BulletManager::SpawnBullet(VECTOR player_pos, int player_level)
 
 bool BulletManager::Spawn(VECTOR player_pos, int player_level, int bullet_type)
 {
-	int interval_count = BULLET_SPAWN_INTERVAL_COUNT[bullet_type] - (int)(player_level / 3);
+	int interval_count = BULLET_SPAWN_INTERVAL_COUNT[bullet_type] - (int)(player_level);
 	if (interval_count < 0)
 		interval_count = 0;
 

@@ -27,8 +27,8 @@ void Sound::InitSound()
 		m_SE_handle[i] = LoadSoundMem(SE_HANDLE_PATH[i]);
 	}
 
-	ChangeVolumeSoundMem(100, m_BGM_handle[Title_BGM]);
-	ChangeVolumeSoundMem(100, m_BGM_handle[Select_BGM]);
+	ChangeVolumeSoundMem(80, m_BGM_handle[Title_BGM]);
+	ChangeVolumeSoundMem(70, m_BGM_handle[Select_BGM]);
 	ChangeVolumeSoundMem(60, m_BGM_handle[Play_BGM]);
 
 	ChangeVolumeSoundMem(100, m_SE_handle[GameOver_BGM]);
