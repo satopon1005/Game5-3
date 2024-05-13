@@ -5,7 +5,7 @@
 constexpr int SELECT_IMAGE_SIZE = 200;
 constexpr char SELECT_BG_HANDLE_PATH[] = { "data/Select/stageselection.png" };
 constexpr char SELECT_BG_HANDLE_PATH2[] = { "data/Select/selection˜g‘g‚Ý.png" };
-constexpr char SELECT_HANDLE_PATH[] = { "data/Select/select.png" };
+constexpr char SELECT_HANDLE_PATH[] = { "data/Select/˜g.png" };
 
 class SceneSelect :public SceneBace
 {

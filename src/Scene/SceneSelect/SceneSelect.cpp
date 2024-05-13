@@ -123,7 +123,7 @@ void SceneSelect::Draw()
 
 		DrawFormatStringToHandle((int)(m_select_pos[i].x - string_width / 2),
 			(int)(m_select_pos[i].y - 20),
-			GetColor(255, 255, 255),
+			GetColor(255, 200, 0),
 			Font::GetFontHandle(HGP‘n‰pŠpÎß¯Ìß‘Ì),
 			c_str);
 	}
