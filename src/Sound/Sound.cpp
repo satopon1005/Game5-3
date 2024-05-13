@@ -27,14 +27,13 @@ void Sound::InitSound()
 		m_SE_handle[i] = LoadSoundMem(SE_HANDLE_PATH[i]);
 	}
 
-	ChangeVolumeSoundMem(100, m_BGM_handle[0]);
-	ChangeVolumeSoundMem(100, m_BGM_handle[1]);
-	ChangeVolumeSoundMem(100, m_BGM_handle[2]);
-	ChangeVolumeSoundMem(100, m_BGM_handle[3]);
-	ChangeVolumeSoundMem(100, m_BGM_handle[4]);
+	ChangeVolumeSoundMem(100, m_BGM_handle[Title_BGM]);
+	ChangeVolumeSoundMem(100, m_BGM_handle[Select_BGM]);
+	ChangeVolumeSoundMem(60, m_BGM_handle[Play_BGM]);
 
-	ChangeVolumeSoundMem(120, m_SE_handle[0]);
-	ChangeVolumeSoundMem(200, m_SE_handle[1]);
+	ChangeVolumeSoundMem(100, m_SE_handle[GameOver_BGM]);
+	ChangeVolumeSoundMem(100, m_SE_handle[Clear_BGM]);
+	ChangeVolumeSoundMem(100, m_SE_handle[Enemy_Death_SE]);
 }
 
 void Sound::PlaySE(int index)
@@ -68,6 +67,22 @@ void Sound::StopBGM(int index)
 	{
 		StopSoundMem(m_BGM_handle[index]);
 	}
+}
+void Sound::StopAll()
+{
+	// BGMí‚é~
+	for (int i = 0; i < ScenetypeMaxNum; i++)
+		if (CheckSoundMem(m_BGM_handle[i]) == 1)
+		{
+			StopSoundMem(m_BGM_handle[i]);
+		}
+
+	// SEí‚é~
+	for (int i = 0; i < SEtypeMaxNum; i++)
+		if (CheckSoundMem(m_SE_handle[i]) == 1)
+		{
+			StopSoundMem(m_SE_handle[i]);
+		}
 }
 
 void Sound::FinSound()

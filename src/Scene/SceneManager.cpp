@@ -29,6 +29,7 @@ void SceneManager::Main()
 		scene = new SceneTitle;
 		scene->Init();
 		SceneBace::g_scene_ID = Loop_Scene;
+		Sound::StopAll();
 		Sound::PlayBGM(Scenetype::Title_BGM);
 		break;
 	}
@@ -40,6 +41,7 @@ void SceneManager::Main()
 		scene = new SceneSelect;
 		scene->Init();
 		SceneBace::g_scene_ID = Loop_Scene;
+		Sound::StopAll();
 		Sound::PlayBGM(Scenetype::Select_BGM);
 		break;
 	}
@@ -51,6 +53,7 @@ void SceneManager::Main()
 		scene = new SceneEdit;
 		scene->Init();
 		SceneBace::g_scene_ID = Loop_Scene;
+		Sound::StopAll();
 		break;
 	}
 	case Play_Scene: {
@@ -61,6 +64,7 @@ void SceneManager::Main()
 		scene = new ScenePlay;
 		scene->Init();
 		SceneBace::g_scene_ID = Loop_Scene;
+		Sound::StopAll();
 		Sound::PlayBGM(Scenetype::Play_BGM);
 		break;
 	}
@@ -72,7 +76,8 @@ void SceneManager::Main()
 		scene = new SceneClear;
 		scene->Init();
 		SceneBace::g_scene_ID = Loop_Scene;
-		Sound::PlayBGM(Scenetype::Clear_BGM);
+		Sound::StopAll();
+		Sound::PlaySE(SEtype::Clear_BGM);
 		break;
 	}
 	case GameOver_Scene: {
@@ -83,7 +88,8 @@ void SceneManager::Main()
 		scene = new SceneGameOver;
 		scene->Init();
 		SceneBace::g_scene_ID = Loop_Scene;
-		Sound::PlayBGM(Scenetype::GameOver_BGM);
+		Sound::StopAll();
+		Sound::PlaySE(SEtype::GameOver_BGM);
 		break;
 	}
 	}

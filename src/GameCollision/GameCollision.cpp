@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "GameCollision.h"
 #include "../Collision/Collision.h"
+#include "../Sound/Sound.h"
 
 bool ChackWallIndex(int wall_index) {
 	if (wall_index < MapChipType::WallMaxNum ||
@@ -213,6 +214,7 @@ void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info
 					}
 
 					item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), spawn_item_index);
+					Sound::PlaySE(SEtype::Enemy_Death_SE);
 				}
 			}
 		}

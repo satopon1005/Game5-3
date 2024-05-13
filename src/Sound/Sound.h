@@ -5,29 +5,29 @@ enum Scenetype
 	Title_BGM,
 	Select_BGM,
 	Play_BGM,
-	GameOver_BGM,
-	Clear_BGM,
 
 	ScenetypeMaxNum
 };
 
 enum SEtype
 {
-	Attack_SE,
+	Clear_BGM,
+	GameOver_BGM,
+	Enemy_Death_SE,
 	
 	SEtypeMaxNum
 };
 
 constexpr char BGM_HANDLE_PATH[ScenetypeMaxNum][64] = {
-	{"data/Sound/BGM/"},
-	{"data/Sound/BGM/"},
-	{"data/Sound/BGM/"},
-	{"data/Sound/BGM/"},
-	{"data/Sound/BGM/"},
+	{"data/Sound/BGM/TitleSceneBGM3.mp3"},
+	{"data/Sound/BGM/SelectSceneBGM2.mp3"},
+	{"data/Sound/BGM/ScenePlayBGM2.mp3"},
 };
 
 constexpr char SE_HANDLE_PATH[SEtypeMaxNum][64] = {
-	{},
+	{"data/Sound/BGM/GameClearBGM1.m4a"},
+	{"data/Sound/BGM/GameOverBGM2.mp3"},
+	{"data/Sound/SE/HitSE2.mp3"},
 };
 
 class Sound
@@ -44,6 +44,7 @@ public:
 	static void StopSE(int index);
 	static void PlayBGM(int index);
 	static void StopBGM(int index);
+	static void StopAll();
 	static void FinSound();
 };
 

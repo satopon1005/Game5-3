@@ -3,10 +3,13 @@
 #include "../../MapChip/MapChip.h"
 
 constexpr int SELECT_IMAGE_SIZE = 200;
+constexpr char SELECT_BG_HANDLE_PATH[] = { "data/Select/stageselection.png" };
 
 class SceneSelect :public SceneBace
 {
 private:
+	int m_bg_handle;
+
 	MapChip mapchip_info;
 	int m_select_num;
 

@@ -5,6 +5,8 @@
 
 void SceneSelect::Init()
 {
+	m_bg_handle = LoadGraph(SELECT_BG_HANDLE_PATH);
+
 	mapchip_info.Init();
 	m_select_num = 0;
 
@@ -70,6 +72,8 @@ void SceneSelect::Step()
 }
 void SceneSelect::Draw()
 {
+	DrawGraph(0, 0, m_bg_handle, true);
+
 	int mapindex[5];
 
 	mapindex[2] = m_select_num;
