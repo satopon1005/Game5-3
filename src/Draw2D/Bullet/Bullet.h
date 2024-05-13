@@ -72,6 +72,8 @@ private:
 
 	int m_display_count;
 
+	int m_hit_count;
+
 public:
 	void Init();
 	void Step();
@@ -81,4 +83,7 @@ public:
 
 	int GetBulletType() { return m_bullet_type; }
 	int GetAnimeIndex() { return m_anime_index.GetCurrentAnimeIndex(); }
+
+	int GetHitCount() { return m_hit_count; }
+	void SetHitCount(int count) { m_hit_count = count; }
 };

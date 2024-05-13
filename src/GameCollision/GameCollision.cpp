@@ -202,7 +202,12 @@ void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info
 									BULLET_COLLISION_SIZE_R[bullet_info.GetBulletInfo(bullet_index).GetBulletType()]))
 			{
 				enemy_info.GetEnemyInfo(enemy_index).IsDamage(BULLET_DAMAGE_NUM[bullet_info.GetBulletInfo(bullet_index).GetBulletType()]);
-				bullet_info.GetBulletInfo(bullet_index).SetIsUse(false);
+
+				bullet_info.GetBulletInfo(bullet_index).SetHitCount(bullet_info.GetBulletInfo(bullet_index).GetHitCount() + 1);
+
+				if (bullet_info.GetBulletInfo(bullet_index).GetBulletType() != BulletType::fireball ||
+					bullet_info.GetBulletInfo(bullet_index).GetHitCount() >= 3)
+					bullet_info.GetBulletInfo(bullet_index).SetIsUse(false);
 
 				if (!enemy_info.GetEnemyInfo(enemy_index).GetIsUse()) {
 					int spawn_item_index = GetRand(BulletTypeMaxNum * 3);

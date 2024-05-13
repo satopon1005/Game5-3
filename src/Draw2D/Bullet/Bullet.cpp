@@ -18,6 +18,8 @@ void Bullet::Init()
 	m_anime_index.Init();
 
 	m_display_count = 0;
+
+	m_hit_count = 0;
 }
 void Bullet::Step()
 {
@@ -139,6 +141,7 @@ bool Bullet::Spawn(VECTOR player_pos, int bullet_type)
 	if (m_isUse) return false;
 
 	m_bullet_type = bullet_type;
+	m_hit_count = 0;
 
 	switch (m_bullet_type) {
 	//âäÇÃèÒ
