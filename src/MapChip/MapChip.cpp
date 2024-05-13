@@ -226,7 +226,7 @@ void MapChip::SaveMapChip()
 		name[i] = 0;
 
 	DrawFormatString(0, 0, GetColor(0, 0, 0), "保存するファイルの名前を入力してください");
-	KeyInputSingleCharString(0, 15, 16, name, false);
+	KeyInputSingleCharString(0, 15, 6, name, false);
 
 	s_mapchip_name += name;
 	s_mapchip_name += ".csv";

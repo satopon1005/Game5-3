@@ -205,8 +205,12 @@ void CollisionEnemyToBullet(EnemyManager& enemy_info, BulletManager& bullet_info
 				if (!enemy_info.GetEnemyInfo(enemy_index).GetIsUse()) {
 					int spawn_item_index = GetRand(BulletTypeMaxNum * 3);
 
-					if (spawn_item_index > BulletTypeMaxNum)
-						spawn_item_index = BulletTypeMaxNum;
+					if (spawn_item_index > BulletTypeMaxNum + 1) {
+						if (GetRand(3) == 0)
+							spawn_item_index = BulletTypeMaxNum + 1;
+						else
+							spawn_item_index = BulletTypeMaxNum;
+					}
 
 					item_info.Spawn(enemy_info.GetEnemyInfo(enemy_index).GetPos(), spawn_item_index);
 				}

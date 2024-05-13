@@ -1,6 +1,5 @@
 #include "DxLib.h"
 #include "SceneSelect.h"
-#include "../../Common.h"
 #include "../../Input/Input.h"
 #include "../../Font/Font.h"
 
@@ -13,8 +12,12 @@ void SceneSelect::Init()
 		m_select_pos[i] = { (float)(-SCREEN_SIZE_X / 10 * 3 + SCREEN_SIZE_X / 10 * 4 * i),
 							(float)(SCREEN_SIZE_Y / 2),
 							0.0f };
-		m_select_size[i] = SELECT_IMAGE_SIZE[1];
+		m_select_size[i] = SELECT_IMAGE_SIZE;
 	}
+	m_select_size[2] += 120;
+	
+	m_arrow_pos[0] = { SCREEN_SIZE_X / 2,SCREEN_SIZE_Y / 2,0.0f };
+	m_arrow_pos[1] = { SCREEN_SIZE_X / 2,SCREEN_SIZE_Y / 2,0.0f };
 }
 void SceneSelect::Step()
 {
@@ -34,6 +37,9 @@ void SceneSelect::Step()
 
 			for (int i = 0; i < 5; i++)
 				m_select_pos[i].x += SCREEN_SIZE_X / 10 * 4;
+
+			m_select_size[1] = m_select_size[2];
+			m_select_size[2] = SELECT_IMAGE_SIZE;
 		}
 		if (Input::IsKeyPush(KEY_INPUT_LEFT)) {
 			m_select_num--;
@@ -42,15 +48,24 @@ void SceneSelect::Step()
 
 			for (int i = 0; i < 5; i++)
 				m_select_pos[i].x -= SCREEN_SIZE_X / 10 * 4;
+
+			m_select_size[3] = m_select_size[2];
+			m_select_size[2] = SELECT_IMAGE_SIZE;
 		}
 	}
 	else if (m_select_pos[2].x < SCREEN_SIZE_X / 2) {
 		for (int i = 0; i < 5; i++)
 			m_select_pos[i].x += 8;
+
+		m_select_size[3] -= 2;
+		m_select_size[2] += 2;
 	}
 	else {
 		for (int i = 0; i < 5; i++)
 			m_select_pos[i].x -= 8;
+
+		m_select_size[1] -= 2;
+		m_select_size[2] += 2;
 	}
 }
 void SceneSelect::Draw()
@@ -73,29 +88,33 @@ void SceneSelect::Draw()
 		mapindex[4] -= mapchip_info.GetMapNum();
 
 	for (int i = 0; i < 5; i++) {
-		DrawBox(m_select_pos[i].x - m_select_size[i] / 2,
-			m_select_pos[i].y - m_select_size[i] / 2,
-			m_select_pos[i].x + m_select_size[i] / 2,
-			m_select_pos[i].y + m_select_size[i] / 2,
+		DrawBox((int)(m_select_pos[i].x - m_select_size[i] / 2),
+			(int)(m_select_pos[i].y - m_select_size[i] / 2),
+			(int)(m_select_pos[i].x + m_select_size[i] / 2),
+			(int)(m_select_pos[i].y + m_select_size[i] / 2),
 			GetColor(255, 0, 0), true);
 
-		char* str = mapchip_info.GetFileName(mapindex[i]);
+		string begin_str = "data/MapChipData/";
+		string end_str = ".csv";
+		int begin_str_len = (int)begin_str.length();
+		int end_str_len = (int)end_str.length();
 
-		str += 17;
+		string s_str = mapchip_info.GetFileName(mapindex[i]);
+		int str_len = (int)s_str.length();
+
+		s_str= s_str.substr(begin_str_len, str_len - begin_str_len - end_str_len);
+
+		char* c_str = (char*)s_str.c_str();
 
 		int string_width = GetDrawFormatStringWidthToHandle(Font::GetFontHandle(HGP‘n‰pŠpÎß¯Ìß‘Ì),
-			str);
+			c_str);
 
-		DrawFormatStringToHandle(m_select_pos[i].x - string_width / 2,
-			m_select_pos[i].y - 20,
+		DrawFormatStringToHandle((int)(m_select_pos[i].x - string_width / 2),
+			(int)(m_select_pos[i].y - 20),
 			GetColor(255, 255, 255),
 			Font::GetFontHandle(HGP‘n‰pŠpÎß¯Ìß‘Ì),
-			str);
+			c_str);
 	}
-
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "ƒZƒŒƒNƒg");
-	DrawFormatString(0, 15, GetColor(255, 255, 255), "%d", m_select_num);
-	DrawFormatString(0, 30, GetColor(255, 255, 255), "%s", mapchip_info.GetFileName(m_select_num));
 }
 void SceneSelect::Fin()
 {

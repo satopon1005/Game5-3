@@ -2,7 +2,7 @@
 #include "Bullet.h"
 
 constexpr int BULLET_MAX_NUM = 100;
-constexpr int BULLET_SPAWN_INTERVAL_COUNT[BulletTypeMaxNum] = { 10,10,10,60 };
+constexpr int BULLET_SPAWN_INTERVAL_COUNT[BulletTypeMaxNum] = { 20,20,20,90 };
 
 class BulletManager
 {
@@ -21,8 +21,8 @@ public:
 	void Draw();
 	void Fin();
 
-	bool Spawn(VECTOR player_pos, int bullet_type);
-	void SpawnBullet(VECTOR player_pos);
+	bool Spawn(VECTOR player_pos, int player_level, int bullet_type);
+	void SpawnBullet(VECTOR player_pos, int player_level);
 
 	bool SetUsableFlag(int index, bool flag) { return m_bullet_usable_flag[index] = flag; }
 

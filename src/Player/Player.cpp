@@ -76,6 +76,9 @@ void Player::IsGetItem(int item_type)
 {
 	switch (item_type) {
 	case ItemType::Potion + BulletTypeMaxNum: {
+		m_hp += 100;
+		if (m_hp > PLAYER_DEFAULT_HP)
+			m_hp = PLAYER_DEFAULT_HP;
 		break;
 	}
 	case ItemType::Keikenchi + BulletTypeMaxNum: {

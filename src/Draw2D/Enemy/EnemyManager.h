@@ -19,7 +19,7 @@ public:
 	void Draw();
 	void Fin();
 
-	void Spawn();
+	void Spawn(int elapsed_second);
 
 	Enemy_Info& GetEnemyInfo(int index) { return enemy_info[index]; }
 };

@@ -29,14 +29,14 @@ void ScenePlay::Step()
 	player_info.Step();
 
 	bullet_info.Step();
-	bullet_info.SpawnBullet(player_info.GetPos());
+	bullet_info.SpawnBullet(player_info.GetPos(), player_info.GetLevel());
 
 	CollisionObjectsToWall(mapchip_info, player_info.GetPos());
 
 	Screen::Step(VGet(player_info.GetPosX(), player_info.GetPosY(), 0.0f));
 
 	enemy_info.Step(player_info.GetPos());
-	enemy_info.Spawn();
+	enemy_info.Spawn(count_time_info.GetElapsedSecond());
 
 	item_info.Step(player_info.GetPos());
 

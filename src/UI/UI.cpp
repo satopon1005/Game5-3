@@ -5,7 +5,7 @@
 void UI_Info::Init()
 {
 	m_pos[0] = { 10,10,0 };
-	m_pos[1] = { 10,(float)(DRAW_UI_Y[0] + 5),0 };
+	m_pos[1] = { 10,(float)(DRAW_UI_Y[0] + 15),0 };
 }
 void UI_Info::Step()
 {

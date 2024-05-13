@@ -44,20 +44,24 @@ void BulletManager::Fin()
 	}
 }
 
-void BulletManager::SpawnBullet(VECTOR player_pos)
+void BulletManager::SpawnBullet(VECTOR player_pos, int player_level)
 {
 	for (int bullet_type_index = 0; bullet_type_index < BulletTypeMaxNum; bullet_type_index++)
 	{
 		for (int continuation_num = 0;
 			continuation_num < BULLET_CONTINUATION_SHOT_NUM[bullet_type_index];
 			continuation_num++)
-			Spawn(player_pos, bullet_type_index);
+			Spawn(player_pos, player_level, bullet_type_index);
 	}
 }
 
-bool BulletManager::Spawn(VECTOR player_pos, int bullet_type)
+bool BulletManager::Spawn(VECTOR player_pos, int player_level, int bullet_type)
 {
-	if (m_spawn_interval_count[bullet_type] < BULLET_SPAWN_INTERVAL_COUNT[bullet_type])
+	int interval_count = BULLET_SPAWN_INTERVAL_COUNT[bullet_type] - (int)(player_level / 3);
+	if (interval_count < 0)
+		interval_count = 0;
+
+	if (m_spawn_interval_count[bullet_type] < interval_count)
 		return false;
 
 	for (int bullet_index = 0; bullet_index < BULLET_MAX_NUM; bullet_index++) {
