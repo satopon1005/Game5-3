@@ -14,6 +14,7 @@ enum SEtype
 	Clear_BGM,
 	GameOver_BGM,
 	Enemy_Death_SE,
+	LevelUp_SE,
 	
 	SEtypeMaxNum
 };
@@ -28,6 +29,7 @@ constexpr char SE_HANDLE_PATH[SEtypeMaxNum][64] = {
 	{"data/Sound/BGM/GameClearBGM1.m4a"},
 	{"data/Sound/BGM/GameOverBGM2.mp3"},
 	{"data/Sound/SE/HitSE2.mp3"},
+	{"data/Sound/SE/LevelUp.mp3"},
 };
 
 class Sound

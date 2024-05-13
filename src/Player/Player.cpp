@@ -4,7 +4,7 @@
 #include "../Screen/Screen.h"
 #include "../Draw2D/Item/Item.h"
 #include "../Draw2D/Bullet/Bullet.h"
-
+#include "../Sound/Sound.h"
 
 void Player::Init()
 {
@@ -86,6 +86,7 @@ void Player::IsGetItem(int item_type)
 		if (m_keikenchi >= DEFAULT_LEVELUP_NECESSARY_KEIKENCHI + (m_level * 5)) {
 			m_level++;
 			m_keikenchi = 0;
+			Sound::PlaySE(SEtype::LevelUp_SE);
 		}
 		break;
 	}

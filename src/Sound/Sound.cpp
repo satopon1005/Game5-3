@@ -34,6 +34,7 @@ void Sound::InitSound()
 	ChangeVolumeSoundMem(100, m_SE_handle[GameOver_BGM]);
 	ChangeVolumeSoundMem(100, m_SE_handle[Clear_BGM]);
 	ChangeVolumeSoundMem(100, m_SE_handle[Enemy_Death_SE]);
+	ChangeVolumeSoundMem(100, m_SE_handle[LevelUp_SE]);
 }
 
 void Sound::PlaySE(int index)
