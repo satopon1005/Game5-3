@@ -5,7 +5,7 @@
 
 void SceneClear::Init()
 {
-	ImageHandle[0] = LoadGraph("data/Clear/title.png");
+	ImageHandle[0] = LoadGraph("data/Clear/Clear.png");
 	ImageHandle[1] = LoadGraph("data/Clear/leftarrow.png");
 	ImageHandle[2] = LoadGraph("data/Clear/rightarrow.png");
 
