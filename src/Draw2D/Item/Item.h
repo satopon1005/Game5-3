@@ -25,7 +25,7 @@ constexpr char ITEM_HANDLE_PATH[ItemTypeMaxNum][64] = {
 	{"data/item/経験値.png"},
 	{"data/item/回復ポーション.png"},
 };
-constexpr char WEAPON_ITEM_HANDLE_PATH[] = { "data/武器の見た目/weapon(仮).png" };
+constexpr char WEAPON_ITEM_HANDLE_PATH[] = { "data/武器の見た目/weapon.png" };
 
 class Item :public Draw2D
 {

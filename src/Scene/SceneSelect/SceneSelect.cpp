@@ -23,19 +23,22 @@ void SceneSelect::Step()
 			SceneBace::g_scene_ID = Play_Scene;
 			MapChip::m_mapchip_index = m_select_num;
 		}
-
-		if (Input::IsKeyPush(KEY_INPUT_LEFT)) {
-			m_select_num--;
-			if (m_select_num < 0)
-				m_select_num = mapchip_info.GetMapNum() - 1;
-
-			for (int i = 0; i < 5; i++)
-				m_select_pos[i].x += SCREEN_SIZE_X / 10 * 4;
+		if (Input::IsKeyPush(KEY_INPUT_BACK)) {
+			SceneBace::g_scene_ID = Title_Scene;
 		}
+
 		if (Input::IsKeyPush(KEY_INPUT_RIGHT)) {
 			m_select_num++;
 			if (m_select_num >= mapchip_info.GetMapNum())
 				m_select_num = 0;
+
+			for (int i = 0; i < 5; i++)
+				m_select_pos[i].x += SCREEN_SIZE_X / 10 * 4;
+		}
+		if (Input::IsKeyPush(KEY_INPUT_LEFT)) {
+			m_select_num--;
+			if (m_select_num < 0)
+				m_select_num = mapchip_info.GetMapNum() - 1;
 
 			for (int i = 0; i < 5; i++)
 				m_select_pos[i].x -= SCREEN_SIZE_X / 10 * 4;
@@ -52,6 +55,23 @@ void SceneSelect::Step()
 }
 void SceneSelect::Draw()
 {
+	int mapindex[5];
+
+	mapindex[2] = m_select_num;
+	mapindex[1] = mapindex[2] - 1;
+	if (mapindex[1] < 0)
+		mapindex[1] += mapchip_info.GetMapNum();
+	mapindex[0] = mapindex[1] - 1;
+	if (mapindex[0] < 0)
+		mapindex[0] += mapchip_info.GetMapNum();
+
+	mapindex[3] = mapindex[2] + 1;
+	if (mapindex[3] >= mapchip_info.GetMapNum())
+		mapindex[3] -= mapchip_info.GetMapNum();
+	mapindex[4] = mapindex[3] + 1;
+	if (mapindex[4] >= mapchip_info.GetMapNum())
+		mapindex[4] -= mapchip_info.GetMapNum();
+
 	for (int i = 0; i < 5; i++) {
 		DrawBox(m_select_pos[i].x - m_select_size[i] / 2,
 			m_select_pos[i].y - m_select_size[i] / 2,
@@ -59,7 +79,7 @@ void SceneSelect::Draw()
 			m_select_pos[i].y + m_select_size[i] / 2,
 			GetColor(255, 0, 0), true);
 
-		char* str = mapchip_info.GetFileName(0);
+		char* str = mapchip_info.GetFileName(mapindex[i]);
 
 		str += 17;
 
