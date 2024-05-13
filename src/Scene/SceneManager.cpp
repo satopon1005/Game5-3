@@ -15,7 +15,7 @@ int SceneBace::g_scene_ID;
 SceneManager::SceneManager()
 {
 	scene = nullptr;
-	SceneBace::g_scene_ID = Title_Scene;
+	SceneBace::g_scene_ID = Clear_Scene;
 }
 
 void SceneManager::Main()
