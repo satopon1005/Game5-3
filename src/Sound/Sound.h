@@ -3,8 +3,10 @@
 enum Scenetype
 {
 	Title_BGM,
+	Select_BGM,
 	Play_BGM,
-	Result_BGM,
+	GameOver_BGM,
+	Clear_BGM,
 
 	ScenetypeMaxNum
 };
@@ -17,9 +19,11 @@ enum SEtype
 };
 
 constexpr char BGM_HANDLE_PATH[ScenetypeMaxNum][64] = {
-	{},
-	{},
-	{},
+	{"data/Sound/BGM/"},
+	{"data/Sound/BGM/"},
+	{"data/Sound/BGM/"},
+	{"data/Sound/BGM/"},
+	{"data/Sound/BGM/"},
 };
 
 constexpr char SE_HANDLE_PATH[SEtypeMaxNum][64] = {

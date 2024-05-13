@@ -30,10 +30,11 @@ void Sound::InitSound()
 	ChangeVolumeSoundMem(100, m_BGM_handle[0]);
 	ChangeVolumeSoundMem(100, m_BGM_handle[1]);
 	ChangeVolumeSoundMem(100, m_BGM_handle[2]);
+	ChangeVolumeSoundMem(100, m_BGM_handle[3]);
+	ChangeVolumeSoundMem(100, m_BGM_handle[4]);
 
 	ChangeVolumeSoundMem(120, m_SE_handle[0]);
 	ChangeVolumeSoundMem(200, m_SE_handle[1]);
-	ChangeVolumeSoundMem(160, m_SE_handle[2]);
 }
 
 void Sound::PlaySE(int index)
